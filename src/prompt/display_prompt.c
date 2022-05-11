@@ -19,7 +19,7 @@ void display_prompt(int status, shell_t *shell)
 
     file = getcwd(file, 0);
     current_dir = my_strlen(file) - 1;
-    my_printf("%s [%d] ", (node ? node->var_name : NULL), status);
+    my_printf("%s [%d] ", (node ? node->var_value : NULL), status);
     for (; file[current_dir] != '/' && current_dir > 0; current_dir--);
     my_printf("%s $ ", (file[current_dir + 1] != '\0'
                 ? file + current_dir + 1 : file + current_dir));
