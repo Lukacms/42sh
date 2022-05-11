@@ -90,7 +90,7 @@ OBJ_TESTS	=	$(SRC_TESTS1:.c=.o) $(SRC_TESTS2:.c=.o)
 
 NAME_TESTS	=	unit_test
 
-NAME	=	mysh
+NAME	=	42sh
 
 LIBMY	=	lib/libmy.a
 
