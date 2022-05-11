@@ -1,0 +1,25 @@
+# Libraries (personnal)
+libmy.a
+
+# binaries produced by makefile
+*.o
+*.so
+*.gcda
+*.gcno
+
+.vscode
+
+# for debugging
+vgcore*
+
+# binaries used in project
+/a.out
+/mysh
+
+# files to tests (local)
+file
+test
+
+# in case emacs
+*~
+*#

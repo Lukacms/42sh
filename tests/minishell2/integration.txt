@@ -1,0 +1,13 @@
+ls -l | cat -e > file
+ls -l | cat -e >> file
+env
+setenv a oui
+unsetenv *
+
+ls < env src
+< ls
+ls <
+ls <<
+<< ls
+> ls
+>> ls
