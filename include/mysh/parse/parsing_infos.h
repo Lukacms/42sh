@@ -54,6 +54,12 @@ typedef struct split_node_s {
     struct split_node_s *next;
 } split_node_t;
 
+typedef struct parsing_infos_s {
+    split_node_t *head;
+    unsigned int size;
+} parsing_infos_t;
+
+
 typedef struct next_type_handler_s {
     char *red;
     redirect_type_t type;

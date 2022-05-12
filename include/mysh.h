@@ -9,10 +9,10 @@
     #define MYSH_H_
 
     #include "mysh/infos.h"
-    #include "mysh/list.h"
-    #include "mysh/alias.h"
+    #include "mysh/list/list.h"
+    #include "mysh/history/history.h"
+    #include "mysh/alias/alias.h"
     #include "mysh/commands.h"
-    #include "mysh/parse/parsing_infos.h"
     #include "mysh/parse/parsing.h"
 
 /*
@@ -22,6 +22,14 @@
 * @return int - SUCCESS | FAILURE
 */
 int launch(char *const env[]);
+
+/*
+* @brief Create a shell object
+*
+* @param shell
+* @return int
+*/
+int create_shell(shell_t *shell, char * const env[]);
 
 /*
 * @brief display of prompt

@@ -10,6 +10,9 @@
 
     #include <sys/types.h>
     #include "mysh/parse/parsing_infos.h"
+    #include "mysh/history/history_infos.h"
+    #include "mysh/alias/alias_infos.h"
+    #include "mysh/list/list_infos.h"
 
     #define SUCCESS 0
     #define FAILURE 84
@@ -22,43 +25,12 @@
 
     #define ALL "*"
 
-typedef struct env_node_s {
-    char *var_name;
-    char *var_value;
-    struct env_node_s *prev;
-    struct env_node_s *next;
-} env_node_t;
-
-typedef struct path_node_s {
-    char *path;
-    struct path_node_s *prev;
-    struct path_node_s *next;
-} path_node_t;
-
-typedef struct alias_node_s {
-    char *name;
-    char **value;
-    struct alias_node_s *prev;
-    struct alias_node_s *next;
-} alias_node_t;
-
 typedef struct shell_s {
-    struct {
-        env_node_t *head;
-        unsigned int size;
-    } env;
-    struct {
-        path_node_t *head;
-        unsigned int size;
-    } path;
-    struct {
-        split_node_t *head;
-        u_int size;
-    } cmd;
-    struct {
-        alias_node_t *head;
-        unsigned int size;
-    } aliases;
+    env_t env;
+    path_t path;
+    parsing_infos_t cmd;
+    alias_t aliases;
+    history_t history;
     int is_output;
     int is_input;
     bool redirect;
