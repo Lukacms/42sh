@@ -11,6 +11,17 @@
     #include <sys/types.h>
     #include "mysh/parse/parsing_infos.h"
 
+    #define SUCCESS 0
+    #define FAILURE 84
+
+    #define ERROR_BUILTIN 1
+    #define ERROR_REDIRECT 1
+    #define UNKNOWN 127
+
+    #define NOT_FOUND 0
+
+    #define ALL "*"
+
 typedef struct env_node_s {
     char *var_name;
     char *var_value;

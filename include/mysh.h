@@ -15,12 +15,6 @@
     #include "mysh/parse/parsing_infos.h"
     #include "mysh/parse/parsing.h"
 
-    #define SUCCESS 0
-    #define FAILURE 84
-    #define ERROR_BUILTIN 1
-    #define ERROR_REDIRECT 1
-    #define UNKNOWN 127
-
 /*
 * @brief base for algortithm - main loop which get the arguments
 *

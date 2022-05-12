@@ -63,6 +63,8 @@ SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/replace_alias.c	\
 		src/aliases/print_alias_value.c	\
 		src/aliases/analyse_aliases.c	\
+		src/aliases/delete/delete_specific_alias.c	\
+		src/aliases/delete/delete_all_aliases.c	\
 
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
 
@@ -103,6 +105,8 @@ LDFLAGS	=	-L./lib
 
 LDLIBS	=	-lmy
 
+CC	=	gcc
+
 all:	$(NAME)
 .PHONY:	all
 
@@ -110,7 +114,7 @@ $(LIBMY):
 	@make -C lib/my
 
 $(NAME):	$(LIBMY) $(OBJ_MAIN) $(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(OBJ_MAIN) $(LDFLAGS) $(LDLIBS)
+	@$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(LDFLAGS) $(LDLIBS)
 
 debug: fclean
 debug: CFLAGS += -g
