@@ -62,6 +62,7 @@ SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/find_alias_by_name.c	\
 		src/aliases/replace_alias.c	\
 		src/aliases/print_alias_value.c	\
+		src/aliases/analyse_aliases.c	\
 
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
 

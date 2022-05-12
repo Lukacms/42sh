@@ -21,6 +21,15 @@
 int get_commands(shell_t *shell, char *cmd_str);
 
 /*
+* @brief apply any necessary modifications into a command
+*
+* @param og
+* @param shell
+* @return char** | NULL
+*/
+char **apply_mods(char **og, shell_t *shell);
+
+/*
 * @brief Get the commands object
 *
 * @param cmd_array

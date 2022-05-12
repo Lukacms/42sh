@@ -47,4 +47,6 @@ int replace_alias(alias_node_t *node, char * const array[]);
 */
 int print_alias_value(char * const value[], bool possibly_more);
 
+char **analyse_aliases(char *og, shell_t *shell);
+
 #endif /* !ALIAS_H_ */

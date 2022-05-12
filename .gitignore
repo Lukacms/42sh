@@ -14,6 +14,7 @@ vgcore*
 
 # binaries used in project
 /a.out
+/mysh
 /42sh
 
 # files to tests (local)
