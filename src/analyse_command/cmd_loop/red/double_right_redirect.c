@@ -20,8 +20,7 @@ int double_right_redirect(red_node_t *node, split_node_t *split, shell_t *shell)
         return status;
     if (check_errors_right(node, shell) != SUCCESS)
         return FAILURE;
-    if ((shell->is_output = open(node->head->cmd[0], O_CREAT | O_APPEND |
-                                O_RDWR, 0666)) < 0)
+    if ((shell->is_output = open(node->head->cmd[0], DOUBLE, MODE)) < 0)
         return FAILURE;
     node->prev->head->prev->cmd = concate_arrays(node->prev->head->prev->cmd,
                                                 node->head->cmd + 1);
