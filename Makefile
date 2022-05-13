@@ -7,30 +7,15 @@
 
 SRC	=	src/launch.c	\
 		src/prompt/display_prompt.c	\
-		src/env/create_env_linked_list/add_node.c	\
-		src/env/create_env_linked_list/create_env_list.c	\
 		src/env/destroy_list/free_list.c	\
-		src/analyse_command/commands_handler/command_cd.c	\
-		src/analyse_command/commands_handler/command_env.c	\
-		src/analyse_command/commands_handler/command_exit.c	\
-		src/analyse_command/commands_handler/command_setenv.c	\
-		src/analyse_command/commands_handler/command_unsetenv.c	\
-		src/analyse_command/commands_handler/command_alias.c	\
-		src/analyse_command/commands_handler/command_unalias.c	\
 		src/env/manipulate_linked_list/find_variable_by_name.c	\
 		src/env/manipulate_linked_list/replace_variable_value.c	\
 		src/env/manipulate_linked_list/add_node_for_setenv.c	\
 		src/env/destroy_list/free_specific_node.c	\
-		src/analyse_command/launch_binaries/paths_list/destroy_paths.c	\
-		src/analyse_command/launch_binaries/paths_list/create_path_list.c	\
-		src/analyse_command/launch_binaries/paths_list/add_path_node.c	\
-		src/analyse_command/launch_binaries/execute/execute_command.c	\
-		src/analyse_command/launch_binaries/execute/search_in_paths.c	\
-		src/analyse_command/launch_binaries/execute/env_to_array.c	\
-		src/analyse_command/launch_binaries/execute/execute_binary.c	\
 		src/analyse_command/cmd_loop/analyse_cmd.c	\
 		src/analyse_command/mods/apply_mods.c	\
 		src/analyse_command/get_cmd.c	\
+		src/destroy/destroy_shell.c	\
 
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/split/add_split_node.c	\
@@ -66,7 +51,30 @@ SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/delete/delete_specific_alias.c	\
 		src/aliases/delete/delete_all_aliases.c	\
 
+SRC_INIT	=	src/prerequisite/create_shell.c	\
+		src/prerequisite/init_history.c	\
+		src/env/create_env_linked_list/add_node.c	\
+		src/env/create_env_linked_list/create_env_list.c	\
+
+SRC_BUILTINS	=	src/analyse_command/commands_handler/command_cd.c	\
+		src/analyse_command/commands_handler/command_env.c	\
+		src/analyse_command/commands_handler/command_exit.c	\
+		src/analyse_command/commands_handler/command_setenv.c	\
+		src/analyse_command/commands_handler/command_unsetenv.c	\
+		src/analyse_command/commands_handler/command_alias.c	\
+		src/analyse_command/commands_handler/command_unalias.c	\
+
+
+SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
+		src/analyse_command/launch_binaries/paths_list/destroy_paths.c	\
+		src/analyse_command/launch_binaries/paths_list/create_path_list.c	\
+		src/analyse_command/launch_binaries/paths_list/add_path_node.c	\
+		src/analyse_command/launch_binaries/execute/execute_command.c	\
+		src/analyse_command/launch_binaries/execute/search_in_paths.c	\
+		src/analyse_command/launch_binaries/execute/execute_binary.c	\
+
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
+OBJ	+= $(SRC_INIT:.c=.o) $(SRC_BUILTINS:.c=.o) $(SRC_EXEC:.c=.o)
 
 SRC_MAIN	=	src/main.c
 
