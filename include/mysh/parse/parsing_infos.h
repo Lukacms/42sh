@@ -8,10 +8,15 @@
 #ifndef PARSING_INFOS_H_
     #define PARSING_INFOS_H_
 
+    #include <fcntl.h>
     #include <sys/types.h>
     #include <stdbool.h>
 
     #define SEPARATOR "\t "
+
+    #define SIMPLE (O_CREAT | O_TRUNC | O_RDWR)
+    #define DOUBLE (O_CREAT | O_APPEND | O_RDWR)
+    #define MODE 0666
 
 typedef enum redirect {
     LEFT_REDIRECT,
@@ -58,7 +63,6 @@ typedef struct parsing_infos_s {
     split_node_t *head;
     unsigned int size;
 } parsing_infos_t;
-
 
 typedef struct next_type_handler_s {
     char *red;

@@ -9,7 +9,22 @@
     #define COMMANDS_H_
 
     #include <sys/types.h>
+    #include <stdio.h>
     #include "mysh/infos.h"
+
+    #define END '\n'
+    #define NO_INVALID_READ '\0'
+
+/*
+* @brief reproduce getline for shell, to analyse
+*
+* @param shell
+* @param ptr
+* @param n
+* @param fd
+* @return ssize_t
+*/
+ssize_t getshellline(shell_t *shell, char **ptr, size_t *n, FILE *stream);
 
 /*
 * @brief analyse command, with redirect

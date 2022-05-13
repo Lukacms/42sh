@@ -14,6 +14,7 @@
     #include "mysh/alias/alias.h"
     #include "mysh/commands.h"
     #include "mysh/parse/parsing.h"
+    #include "mysh/parse/edition.h"
 
 /*
 * @brief base for algortithm - main loop which get the arguments

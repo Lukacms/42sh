@@ -10,4 +10,12 @@
 
     #include "mysh/infos.h"
 
+/*
+* @brief init history part for shell
+*
+* @param history
+* @return int
+*/
+int init_history(history_t *history);
+
 #endif /* !HISTORY_H_ */
