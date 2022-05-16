@@ -13,7 +13,7 @@
 #include "mysh.h"
 #include "my.h"
 
-static void forking_job(char *str, shell_t *shell, int *fd)
+static void forking_job(char *str, int *fd)
 {
     size_t n = 0;
     ssize_t size = 0;
@@ -44,7 +44,7 @@ static void input_loop(char *str, shell_t *shell)
     if ((cpid = fork()) < 0)
         return;
     else if (cpid == 0)
-        forking_job(str, shell, fd);
+        forking_job(str, fd);
     waitpid(cpid, &status, WUNTRACED);
     close(fd[1]);
     shell->is_input = fd[0];

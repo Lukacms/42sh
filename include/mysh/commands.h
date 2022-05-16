@@ -117,6 +117,15 @@ int cmd_handler_unalias(char **array, shell_t *shell);
 int cmd_handler_unsetenv(char **array, shell_t *shell);
 
 /*
+* @brief cmd_handler: history
+* 
+* @param array 
+* @param shell 
+* @return int 
+*/
+int cmd_handler_history(char **array, shell_t *shell);
+
+/*
 * @brief execute possible binaries
 *
 * @param shell

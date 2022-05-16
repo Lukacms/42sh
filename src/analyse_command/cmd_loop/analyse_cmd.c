@@ -17,6 +17,7 @@ static const command_handler_binder_t command_handler[] = {
     {.existing_command = "unsetenv", .handler = &cmd_handler_unsetenv},
     {.existing_command = "alias", .handler = &cmd_handler_alias},
     {.existing_command = "unalias", .handler = &cmd_handler_unalias},
+    {.existing_command = "history", .handler = &cmd_handler_history},
     {0}
 };
 

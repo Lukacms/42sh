@@ -42,6 +42,7 @@ SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red/concate_nodes.c	\
 		src/analyse_command/cmd_loop/pipe/execute_pipe.c	\
 		src/analyse_command/cmd_loop/red/check_errors.c	\
+		src/history/update_history.c	\
 
 SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/find_alias_by_name.c	\
@@ -63,7 +64,7 @@ SRC_BUILTINS	=	src/analyse_command/commands_handler/command_cd.c	\
 		src/analyse_command/commands_handler/command_unsetenv.c	\
 		src/analyse_command/commands_handler/command_alias.c	\
 		src/analyse_command/commands_handler/command_unalias.c	\
-
+		src/analyse_command/commands_handler/command_history.c	\
 
 SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 		src/analyse_command/launch_binaries/paths_list/destroy_paths.c	\
