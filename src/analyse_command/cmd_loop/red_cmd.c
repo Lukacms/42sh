@@ -46,7 +46,7 @@ int red_cmd_loop(split_node_t *split, shell_t *shell)
     red_node_t *node = NULL;
     int status = 0;
 
-    if (!split || !shell)
+    if (!split || !shell || !split->head)
         return status;
     node = split->head->prev;
     if (split->size == 1 && check_unique_errors(node))
