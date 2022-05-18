@@ -9,18 +9,27 @@
 #include "mysh.h"
 #include "my.h"
 
+static int array_len(char **array)
+{
+    int i = 0;
+
+    if (!array)
+        return 0;
+    for (; array[i]; i++);
+    return i;
+}
+
 int update_history(char *cmd, shell_t *shell)
 {
-    u_int i = 0;
     int size = 0;
+    int array_size = array_len(shell->history.history);
 
     if (!cmd || !shell)
         return FAILURE;
     size = my_strlen(cmd);
-    if (shell->history.history)
-        for (; shell->history.history[i]; i++);
-    i += 1;
-    shell->history.history = my_reallocarray(shell->history.history, i, size);
-    my_strcpy(shell->history.history[i - 1], cmd);
+    array_size += 1;
+    shell->history.history =
+        my_reallocarray(shell->history.history, array_size, size);
+    shell->history.history[array_size - 1] = my_strdup(cmd);
     return SUCCESS;
 }
