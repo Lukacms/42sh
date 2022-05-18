@@ -20,6 +20,7 @@ vgcore*
 # files to tests (local)
 file
 test
+.42sh*
 
 # in case emacs
 *~
