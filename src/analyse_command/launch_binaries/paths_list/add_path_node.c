@@ -10,14 +10,21 @@
 #include "mysh.h"
 #include "my.h"
 
+static void init_node(path_node_t *node)
+{
+    node->path = NULL;
+    node->prev = node;
+    node->next = node;
+}
+
 static void put_path_in_node(path_node_t *node, char *path)
 {
     int i = 0;
 
     for (; path[i] != ':' && path[i] != '\0'; i += 1);
-    node->path = malloc(sizeof(i + 2));
-    memset(node->path, '\0', sizeof(char) * (i + 2));
-    node->path = my_strncpy(node->path, path, i + 1);
+    node->path = malloc(sizeof(char) * (i + 2));
+    memset(node->path, '\0', sizeof(char) * (i + 1));
+    node->path = my_strncpy(node->path, path, i);
     node->path[i] = '/';
 }
 
@@ -39,12 +46,10 @@ int add_path_node(shell_t *shell, char *one_of_paths)
 
     if (!shell || !one_of_paths)
         return FAILURE;
-    node = malloc(sizeof(path_node_t));
-    if (!node)
+    if (!(node = malloc(sizeof(path_node_t))))
         return FAILURE;
+    init_node(node);
     put_path_in_node(node, one_of_paths);
-    node->prev = node;
-    node->next = node;
     put_node_in_list(shell, node);
     shell->path.size += 1;
     return SUCCESS;
