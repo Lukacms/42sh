@@ -17,6 +17,7 @@
 
     #define SUCCESS 0
     #define FAILURE 84
+    #define NO_COMMAND 0
     #define ERROR_BUILTIN 1
     #define ERROR_REDIRECT 1
     #define UNKNOWN 127

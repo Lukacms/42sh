@@ -19,6 +19,7 @@ vgcore*
 
 # files to tests (local)
 file
+*.txt
 test
 .42sh*
 
