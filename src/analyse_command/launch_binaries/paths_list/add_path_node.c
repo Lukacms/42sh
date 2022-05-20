@@ -5,6 +5,7 @@
 ** add_path_node
 */
 
+#include <string.h>
 #include <stdlib.h>
 #include "mysh.h"
 #include "my.h"
@@ -14,7 +15,9 @@ static void put_path_in_node(path_node_t *node, char *path)
     int i = 0;
 
     for (; path[i] != ':' && path[i] != '\0'; i += 1);
-    node->path = my_strndup(path, i + 1);
+    node->path = malloc(sizeof(i + 2));
+    memset(node->path, '\0', sizeof(char) * (i + 2));
+    node->path = my_strncpy(node->path, path, i + 1);
     node->path[i] = '/';
 }
 

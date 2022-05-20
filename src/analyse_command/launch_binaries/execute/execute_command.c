@@ -28,9 +28,9 @@ int execute_command(shell_t *shell, char **cmd)
         return SUCCESS;
     if (is_fullpath(cmd[0]) == 1) {
         if ((status = execute_binary(cmd[0], cmd, env, shell)) == UNKNOWN)
-            my_printf("%s: Command not found.\n", cmd[0]);
+            my_printf("%s: command not found.\n", cmd[0]);
     } else if ((status = search_command_in_path(shell, cmd, env)) == UNKNOWN)
-        my_printf("%s: Command not found.\n", cmd[0]);
+        my_printf("%s: command not found.\n", cmd[0]);
     free_array((void **)env);
     return status;
 }
