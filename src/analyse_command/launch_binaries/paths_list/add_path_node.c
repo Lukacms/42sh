@@ -26,6 +26,7 @@ static void put_path_in_node(path_node_t *node, char *path)
     memset(node->path, '\0', sizeof(char) * (i + 1));
     node->path = my_strncpy(node->path, path, i);
     node->path[i] = '/';
+    node->path[i + 1] = '\0';
 }
 
 static void put_node_in_list(shell_t *shell, path_node_t *node)
