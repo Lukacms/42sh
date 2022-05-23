@@ -19,7 +19,9 @@ vgcore*
 
 # files to tests (local)
 file
+*.txt
 test
+.42sh*
 
 # files created by project
 /.42sh_history

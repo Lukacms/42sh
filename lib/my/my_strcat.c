@@ -5,6 +5,7 @@
 ** task02d07
 */
 
+#include <string.h>
 #include <stdlib.h>
 #include "my.h"
 
@@ -16,6 +17,7 @@ char *my_strcat(char *src, char const *add)
 
     if (!dest || !add)
         return NULL;
+    memset(dest, '\0', sizeof(char) * len);
     for (int i = 0; src[i] != '\0'; i++)
         dest[i] = src[i];
     for (int i = 0; add[i] != '\0'; i += 1)

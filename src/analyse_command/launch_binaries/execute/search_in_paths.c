@@ -16,7 +16,7 @@ int search_command_in_path(shell_t *shell, char **cmd, char *const env[])
     int status = 0;
 
     if (create_path_list(shell) != SUCCESS || !(tmp = shell->path.head))
-        return 1;
+        return UNKNOWN;
     for (unsigned int i = 0; i < shell->path.size; i++) {
         path = my_strcat(tmp->path, cmd[0]);
         if ((status = execute_binary(path, cmd, env, shell)) != UNKNOWN) {
