@@ -8,19 +8,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/wait.h>
 #include <sys/types.h>
 #include "mysh.h"
 #include "my.h"
 
-static void input_loop(char *str, shell_t *shell)
+static void forking_job(char *str, int *fd)
 {
     size_t n = 0;
     ssize_t size = 0;
     char *cmp = NULL;
-    int fd[2] = {0};
 
-    if (pipe(fd) < 0)
-        return;
     while (size > -1) {
         my_printf("? ");
         size = getline(&cmp, &n, stdin);
@@ -32,6 +30,22 @@ static void input_loop(char *str, shell_t *shell)
             write(fd[1], "\n", 1);
         }
     }
+    exit(SUCCESS);
+}
+
+static void input_loop(char *str, shell_t *shell)
+{
+    int fd[2] = {0};
+    pid_t cpid = 0;
+    int status = 0;
+
+    if (pipe(fd) < 0)
+        return;
+    if ((cpid = fork()) < 0)
+        return;
+    else if (cpid == 0)
+        forking_job(str, fd);
+    waitpid(cpid, &status, WUNTRACED);
     close(fd[1]);
     shell->is_input = fd[0];
 }

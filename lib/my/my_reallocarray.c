@@ -17,7 +17,7 @@ char **my_reallocarray(char **ptr, u_int y, u_int x)
     new_ptr = malloc(sizeof(char *) * (y + 1));
     if (!new_ptr)
         return NULL;
-    for (i = 0; ptr && ptr[i]; i++)
+    for (; ptr && ptr[i]; i++)
         new_ptr[i] = my_strdup(ptr[i]);
     for (; i < y; i++) {
         if (!(new_ptr[i] = malloc(sizeof(char) * (x + 1))))

@@ -49,7 +49,7 @@ int cmd_handler_alias(char **array, shell_t *shell)
     int i = 0;
 
     if (!array || !shell)
-        return FAILURE;
+        return ERROR_BUILTIN;
     for (; array[i]; i++);
     if (i == 1)
         return print_all_aliases(shell);

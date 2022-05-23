@@ -9,18 +9,12 @@
     #define MYSH_H_
 
     #include "mysh/infos.h"
-    #include "mysh/list.h"
-    #include "mysh/alias.h"
+    #include "mysh/list/list.h"
+    #include "mysh/history/history.h"
+    #include "mysh/alias/alias.h"
     #include "mysh/commands.h"
-    #include "mysh/parse/parsing_infos.h"
     #include "mysh/parse/parsing.h"
-
-    #define SUCCESS 0
-    #define FAILURE 84
-    #define NO_COMMAND 0
-    #define ERROR_BUILTIN 1
-    #define ERROR_REDIRECT 1
-    #define UNKNOWN 127
+    #include "mysh/parse/edition.h"
 
 /*
 * @brief base for algortithm - main loop which get the arguments
@@ -29,6 +23,14 @@
 * @return int - SUCCESS | FAILURE
 */
 int launch(char *const env[]);
+
+/*
+* @brief Create a shell object
+*
+* @param shell
+* @return int
+*/
+int create_shell(shell_t *shell, char * const env[]);
 
 /*
 * @brief display of prompt

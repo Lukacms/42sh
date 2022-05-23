@@ -18,7 +18,7 @@ int cmd_handler_unsetenv(char **array, shell_t *shell)
         my_printf("unsetenv: too few arguments\n");
         return ERROR_BUILTIN;
     }
-    if (my_strcmp(array[1], "*") == 0)
+    if (my_strcmp(array[1], ALL) == SUCCESS)
         free_list(shell);
     else
         for (int j = 1; j < i; j++)

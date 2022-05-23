@@ -36,7 +36,7 @@ int launch(char *const env[])
 
     if (!shell || !env)
         return FAILURE;
-    create_env_list(env, shell);
+    create_shell(shell, env);
     shell_loop(shell);
     free_list(shell);
     free(shell);

@@ -23,6 +23,9 @@ file
 test
 .42sh*
 
+# files created by project
+/.42sh_history
+
 # in case emacs
 *~
 *#

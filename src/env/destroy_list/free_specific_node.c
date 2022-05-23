@@ -22,5 +22,7 @@ void free_specific_node(shell_t *shell, char *to_find)
     if (node->var_value)
         free(node->var_value);
     shell->env.size -= 1;
+    if (shell->env.size == 0)
+        shell->env.head = NULL;
     free(node);
 }
