@@ -17,17 +17,26 @@ SRC	=	src/launch.c	\
 		src/analyse_command/get_cmd.c	\
 		src/destroy/destroy_shell.c	\
 
+SPECIAL_VARIABLE =	src/analyse_command/mods/special_variables/handler/
+
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
+		src/analyse_command/parsing/separate_cmd.c	\
 		src/analyse_command/parsing/split/add_split_node.c	\
 		src/analyse_command/parsing/split/info_split_node.c	\
 		src/analyse_command/parsing/split/free_split_node.c	\
-		src/analyse_command/parsing/split/red/add_redirect_node.c	\
 		src/analyse_command/parsing/split/red/info_red_node.c	\
 		src/analyse_command/parsing/split/red/free_red_list.c	\
+		src/analyse_command/parsing/split/red/add_redirect_node.c	\
 		src/analyse_command/parsing/split/red/pipe/add_pipe_node.c	\
-		src/analyse_command/parsing/split/red/pipe/info_in_pipe_node.c	\
 		src/analyse_command/parsing/split/red/pipe/free_pipe_list.c	\
-		src/analyse_command/parsing/separate_cmd.c	\
+		src/analyse_command/parsing/split/red/pipe/info_in_pipe_node.c	\
+		src/analyse_command/mods/special_variables/special_variables.c	\
+		$(addprefix $(SPECIAL_VARIABLE), dollard_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), underscore_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), exclamation_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), hashtag_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), zero_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), interogation_handler.c)	\
 
 SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red_cmd.c	\
