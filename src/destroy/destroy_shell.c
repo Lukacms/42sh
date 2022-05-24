@@ -7,3 +7,9 @@
 
 #include <stdlib.h>
 #include "mysh.h"
+
+void destroy_shell(shell_t *shell)
+{
+    if (!shell)
+        return;
+}

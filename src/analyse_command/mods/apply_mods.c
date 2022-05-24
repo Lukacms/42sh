@@ -40,6 +40,6 @@ char **apply_mods(char **og, shell_t *shell)
     if (!og || !shell)
         return og;
     dest = ((dest = aliases_infos(og, shell)) ? dest : og);
-    dest = ((dest = special_variables(og, shell)) ? dest : og);
+    dest = ((dest = special_variables(dest, shell)) ? dest : og);
     return dest;
 }
