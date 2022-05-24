@@ -12,11 +12,21 @@
 int cmd_handler_history(char __attribute__((unused))**array, shell_t *shell)
 {
     char **history = NULL;
+    int incrementer = 1;
+    int i = 0;
 
     if (!shell || !(history = shell->history.history))
         return ERROR_BUILTIN;
-    for (u_int i = 0; history[i]; i++) {
-        my_printf("%d %s\n", i, history[i]);
+    if (shell->history.sort) {
+        i = array_len(history) - 1;
+        incrementer = -1;
     }
+    for (; i >= 0 && i < array_len(shell->history.history); i += incrementer) {
+        if (!(shell->history.without_number))
+            my_printf("%d ", i);
+        my_printf("%s\n", history[i]);
+    }
+    shell->history.without_number = 0;
+    shell->history.sort = 0;
     return SUCCESS;
 }
