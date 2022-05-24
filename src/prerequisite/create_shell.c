@@ -20,6 +20,7 @@ static void init_shell(shell_t *shell)
     shell->path = (path_t){0};
     shell->redirect = false;
     shell->termios = (termios_t){0};
+    shell->return_cmd = 0;
 }
 
 int create_shell(shell_t *shell, char * const env[])
