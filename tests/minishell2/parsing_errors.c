@@ -35,7 +35,10 @@ Test(add_nodes, null_params)
 
 Test(launch, without_env)
 {
-    cr_assert_eq(launch(NULL), FAILURE);
+    char * const env[] = {NULL};
+
+    cr_assert_eq(launch(NULL, NULL), FAILURE);
+    cr_assert_eq(launch(env, NULL), FAILURE);
 }
 
 Test(info_in_node, null_param)

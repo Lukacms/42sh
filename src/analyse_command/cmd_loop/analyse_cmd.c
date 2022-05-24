@@ -21,6 +21,13 @@ static const command_handler_binder_t command_handler[] = {
     {0}
 };
 
+static void backup_array(char **cmd_arr, shell_t *shell)
+{
+    if (shell->special.last)
+        free_array((void **)shell->special.last);
+    shell->special.last = dup_array(cmd_arr);
+}
+
 int analyse_cmd(char **cmd_array, shell_t *shell)
 {
     int status = 0;
@@ -34,5 +41,6 @@ int analyse_cmd(char **cmd_array, shell_t *shell)
     }
     status = execute_command(shell, cmd_array);
     free_paths_nodes(shell);
+    backup_array(cmd_array, shell);
     return status;
 }

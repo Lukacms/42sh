@@ -17,13 +17,11 @@ static int cmp_arrays(char **src, char **cmp)
     return SUCCESS;
 }
 
-char **apply_mods(char **og, shell_t *shell)
+static char **aliases_infos(char **og, shell_t *shell)
 {
     char **new = NULL;
     char **dest = NULL;
 
-    if (!og || !shell)
-        return og;
     if ((new = analyse_aliases(og[0], shell)))
         dest = concate_arrays(new, og + 1);
     new = NULL;
@@ -32,5 +30,16 @@ char **apply_mods(char **og, shell_t *shell)
         dest = concate_arrays(new, dest + 1);
     if (!dest)
         return og;
+    return dest;
+}
+
+char **apply_mods(char **og, shell_t *shell)
+{
+    char **dest = NULL;
+
+    if (!og || !shell)
+        return og;
+    dest = ((dest = aliases_infos(og, shell)) ? dest : og);
+    dest = ((dest = special_variables(dest, shell)) ? dest : og);
     return dest;
 }

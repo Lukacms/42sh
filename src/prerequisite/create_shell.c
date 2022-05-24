@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 static void init_shell(shell_t *shell)
 {
@@ -20,13 +21,16 @@ static void init_shell(shell_t *shell)
     shell->path = (path_t){0};
     shell->redirect = false;
     shell->termios = (termios_t){0};
+    shell->special = (special_variables_infos_t){0};
 }
 
-int create_shell(shell_t *shell, char * const env[])
+int create_shell(shell_t *shell, char * const env[], char * const argv[])
 {
     if (!shell)
         return FAILURE;
     init_shell(shell);
+    if (!(shell->special.current_script = my_strdup(argv[0])))
+        return FAILURE;
     if (create_env_list(env, shell) != SUCCESS)
         return FAILURE;
     if (init_history(&shell->history) != SUCCESS)

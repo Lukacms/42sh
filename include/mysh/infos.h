@@ -16,6 +16,7 @@
     #include "mysh/history/history_infos.h"
     #include "mysh/alias/alias_infos.h"
     #include "mysh/list/list_infos.h"
+    #include "mysh/alias/special_variables_infos.h"
 
     #define SUCCESS 0
     #define FAILURE 84
@@ -36,11 +37,12 @@ typedef struct shell_s {
     parsing_infos_t cmd;
     alias_t aliases;
     history_t history;
+    termios_t termios;
     int is_output;
     int is_input;
     bool redirect;
     bool finished;
-    termios_t termios;
+    special_variables_infos_t special;
 } shell_t;
 
 typedef int (*command_handler_t)(char **array, shell_t *shell);
