@@ -21,7 +21,7 @@ int get_commands(shell_t *shell, char *cmd)
     if (parse_cmd(cmd, shell) != SUCCESS)
         return status;
     status = split_cmd_loop(shell);
-    shell->return_cmd = status;
+    shell->special.status = status;
     free_split_node(shell);
     return status;
 }
