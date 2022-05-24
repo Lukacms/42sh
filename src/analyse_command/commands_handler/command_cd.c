@@ -82,7 +82,8 @@ int cmd_handler_cd(char **array, shell_t *shell)
     for (; array[i] != NULL; i++);
     if (i > 2)
         return my_printf("cd: Too many arguments.\n");
-    if (i == 1 || (i == 2 && my_strcmp(array[1], "--") == 0))
+    if (i == 1 || (i == 2 && ((my_strcmp(array[1], "--") == 0) ||
+    (my_strcmp(array[1], "~") == 0))))
         return get_usr_to_home(shell);
     else if (my_strcmp(array[1], "-") == 0)
         return get_to_old_pwd(shell);
