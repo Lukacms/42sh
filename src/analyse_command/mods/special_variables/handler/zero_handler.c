@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 char *zero_handler(shell_t *shell, char *line)
 {
@@ -14,5 +15,8 @@ char *zero_handler(shell_t *shell, char *line)
 
     if (!shell || !line)
         return NULL;
+    if (!(new = my_strdup(shell->special.current_script)))
+        return line;
+    free(line);
     return new;
 }

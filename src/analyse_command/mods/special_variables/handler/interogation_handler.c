@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 char *interogation_handler(shell_t *shell, char *line)
 {
@@ -14,5 +15,8 @@ char *interogation_handler(shell_t *shell, char *line)
 
     if (!shell || !line)
         return NULL;
+    if (!(new = my_int_to_str(shell->special.status)))
+        return line;
+    free(line);
     return new;
 }

@@ -5,8 +5,10 @@
 ** dollard_handler
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 char *dollard_handler(shell_t *shell, char *line)
 {
@@ -14,5 +16,7 @@ char *dollard_handler(shell_t *shell, char *line)
 
     if (!shell || !line)
         return NULL;
+    if (!(new = my_int_to_str(getpid())))
+        return line;
     return new;
 }

@@ -14,5 +14,5 @@ char *underscore_handler(shell_t *shell, char *line)
 
     if (!shell || !line)
         return NULL;
-    return new;
+    return line;
 }
