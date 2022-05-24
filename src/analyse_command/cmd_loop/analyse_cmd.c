@@ -28,6 +28,8 @@ int analyse_cmd(char **cmd_array, shell_t *shell)
     if (!shell || !cmd_array || !cmd_array[0])
         return NOT_FOUND;
     cmd_array = apply_mods(cmd_array, shell);
+    for (int j = 0; cmd_array && cmd_array[j]; j++)
+        printf("%s\n", cmd_array[j]);
     for (int i = 0; command_handler[i].handler != NULL; i++) {
         if (my_strcmp(cmd_array[0], command_handler[i].existing_command) == 0)
             return command_handler[i].handler(cmd_array, shell);
