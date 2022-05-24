@@ -5,25 +5,32 @@
 ** terminal
 */
 
-#include "mysh.h"
-#include <termios.h>
 #include <unistd.h>
+#include <termios.h>
+#include <stdlib.h>
+#include <curses.h>
+#include <term.h>
+#include "mysh.h"
 
-int my_terminal(shell_t *shell)
+int init_terminal(shell_t *shell)
 {
-    struct termios termios;
-    char *term_v = NULL;
     env_node_t *term = find_variable_by_name(shell, "TERM");
 
-    term_v = getenv("TERM");
-    if ((tgetent(NULL, term_v)) < 0)
-        return 84;
-    if ((tcgetattr(STDIN_FILENO, &termios)) < 0)
+    if (!(term = find_variable_by_name(shell, "TERM")))
         return FAILURE;
-    termios.c_lflag &= ~(ICANON | ECHO | IEXTEN);
-    termios.c_cc[VMIN]  = 1;
-    termios.c_cc[VTIME] = 0;
-    if ((tcsetattr(STDIN_FILENO, TCSADRAIN, &termios)) < 0)
+    if ((tgetent(NULL, term->var_value)) < 0)
         return FAILURE;
-    return 0;
+    if ((tcgetattr(STDIN_FILENO, &shell->termios)) < 0)
+        return FAILURE;
+    shell->termios.c_lflag = (ICANON | ECHO | ECHOE | IEXTEN | ISIG);
+    shell->termios.c_cc[VMIN] = 1;
+    shell->termios.c_cc[VTIME] = 0;
+    shell->termios.c_cc[VEOF] = 4;
+    shell->termios.c_cc[VERASE] = 0x7f;
+    shell->termios.c_cc[VINTR] = 3;
+    shell->termios.c_iflag = BRKINT | ICRNL | IXON;
+    shell->termios.c_oflag = ONLCR | ONOCR | OPOST | OFDEL;
+    if ((tcsetattr(STDIN_FILENO, TCSADRAIN, &shell->termios)) < 0)
+        return FAILURE;
+    return SUCCESS;
 }
