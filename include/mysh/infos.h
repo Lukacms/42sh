@@ -10,6 +10,8 @@
 
     #include <sys/types.h>
     #include <stdio.h>
+    #include <termios.h>
+
     #include "mysh/parse/parsing_infos.h"
     #include "mysh/history/history_infos.h"
     #include "mysh/alias/alias_infos.h"
@@ -26,6 +28,8 @@
 
     #define ALL "*"
 
+typedef struct termios termios_t;
+
 typedef struct shell_s {
     env_t env;
     path_t path;
@@ -36,6 +40,7 @@ typedef struct shell_s {
     int is_input;
     bool redirect;
     bool finished;
+    termios_t termios;
 } shell_t;
 
 typedef int (*command_handler_t)(char **array, shell_t *shell);

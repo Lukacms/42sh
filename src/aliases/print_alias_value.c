@@ -13,7 +13,7 @@ int print_alias_value(char * const value[], bool possibly_more)
 {
     int i = 0;
 
-    if (!value) 
+    if (!value)
         return FAILURE;
     for (; value[i]; i++);
     if (possibly_more && i > 1)

@@ -53,7 +53,7 @@ Test(execute_command, inexisting_programm, .init=redirect)
 
     cr_assert_eq(create_env_list(eng, list), 0);
     cr_assert_neq(execute_command(list, cmd), 0);
-    cr_assert_stdout_eq_str("ah: command not found.\n");
+    cr_assert_stdout_eq_str("ah: Command not found.\n");
     free_list(list);
     free(list);
 }
@@ -66,7 +66,7 @@ Test(execute_command, inexisting_programm_fullpath, .init=redirect)
 
     cr_assert_eq(create_env_list(eng, list), 0);
     cr_assert_eq(execute_command(list, cmd), 127);
-    cr_assert_stdout_eq_str("./ah: command not found.\n");
+    cr_assert_stdout_eq_str("./ah: Command not found.\n");
     free_list(list);
     free(list);
 }
