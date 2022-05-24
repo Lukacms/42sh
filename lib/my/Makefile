@@ -65,6 +65,7 @@ SRC_LIB	=	my_compute_power_rec.c				\
 			dup_array.c							\
 			str_to_word_array.c					\
 			concat_arrays.c						\
+			array_len.c						\
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -9,25 +9,69 @@
 #include "mysh.h"
 #include "my.h"
 
-static int array_len(char **array)
+static int get_options(char flag, shell_t *shell)
 {
-    int i = 0;
+    if (!shell)
+        return FAILURE;
+    switch (flag) {
+        case 'c':
+            shell->history.clear = 1;
+            break;
+        case 'h':
+            shell->history.without_number = 1;
+            break;
+        case 'r':
+            shell->history.sort = 1;
+            break;
+        default:
+            return FAILURE;
+    }
+    return SUCCESS;
+}
 
-    if (!array)
-        return 0;
-    for (; array[i]; i++);
-    return i;
+static int parse_history_cmd(char *cmd, shell_t *shell)
+{
+    char *optstring = "chr";
+    int opt = 0;
+    int len = 0;
+    char **args = NULL;
+
+    if (!cmd || !shell)
+        return FAILURE;
+    if (my_strncmp(cmd, "history ", 8) != 0)
+        return SUCCESS;
+    if (!(args = str_to_array_choice(cmd, " ")))
+        return FAILURE;
+    len = array_len(args);
+    if (len > 3) {
+        my_printf("history: Too many arguments.\n");
+        return FAILURE;
+    }
+    optind = 1;
+    while ((opt = getopt(len, args, optstring)) != -1) {
+        if (get_options(opt, shell) != SUCCESS)
+            return FAILURE;
+    }
+    return SUCCESS;
 }
 
 int update_history(char *cmd, shell_t *shell)
 {
     int size = 0;
-    int array_size = array_len(shell->history.history);
+    int array_size = 0;
 
     if (!cmd || !shell)
         return FAILURE;
+    if (parse_history_cmd(cmd, shell) != SUCCESS)
+        return FAILURE;
     size = my_strlen(cmd);
-    array_size += 1;
+    if (shell->history.clear) {
+        free_array((void**)shell->history.history);
+        shell->history.history = NULL;
+        shell->history.clear = 0;
+        return SUCCESS;
+    }
+    array_size = array_len(shell->history.history) + 1;
     shell->history.history =
         my_reallocarray(shell->history.history, array_size, size);
     shell->history.history[array_size - 1] = my_strdup(cmd);

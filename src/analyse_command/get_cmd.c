@@ -16,7 +16,8 @@ int get_commands(shell_t *shell, char *cmd)
 
     if (!shell || !cmd)
         return SUCCESS;
-    update_history(cmd, shell);
+    if (update_history(cmd, shell) != SUCCESS)
+        return status;
     if (parse_cmd(cmd, shell) != SUCCESS)
         return status;
     status = split_cmd_loop(shell);

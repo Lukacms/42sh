@@ -76,5 +76,6 @@ void my_memset(char *ptr, u_int x, char c);
 char **dup_array(char * const origin[]);
 char **str_to_array_choice(char *src, char *delim);
 char **concate_arrays(char **src, char **add);
+int array_len(char **array);
 
 #endif /*MY_H*/
