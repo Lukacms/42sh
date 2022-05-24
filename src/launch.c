@@ -34,7 +34,7 @@ int launch(char *const env[], char * const argv[])
 {
     shell_t *shell = malloc(sizeof(shell_t));
 
-    if (!shell || !env || !isatty(STDOUT_FILENO))
+    if (!shell || !env || !argv || !isatty(STDOUT_FILENO))
         return FAILURE;
     create_shell(shell, env, argv);
     shell_loop(shell);
