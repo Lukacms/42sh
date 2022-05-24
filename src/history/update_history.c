@@ -55,6 +55,18 @@ static int parse_history_cmd(char *cmd, shell_t *shell)
     return SUCCESS;
 }
 
+static int write_history_in_file(char *cmd, shell_t *shell)
+{
+    if (!cmd || !shell)
+        return FAILURE;
+    if (!(shell->history.fp = fopen(HISTORY_FILE, "a+")))
+        return INVALID_FILE;
+    fwrite(cmd, my_strlen(cmd), 1, shell->history.fp);
+    fwrite("\n", 1, 1, shell->history.fp);
+    fclose(shell->history.fp);
+    return SUCCESS;
+}
+
 int update_history(char *cmd, shell_t *shell)
 {
     int size = 0;
@@ -75,5 +87,6 @@ int update_history(char *cmd, shell_t *shell)
     shell->history.history =
         my_reallocarray(shell->history.history, array_size, size);
     shell->history.history[array_size - 1] = my_strdup(cmd);
+    write_history_in_file(cmd, shell);
     return SUCCESS;
 }

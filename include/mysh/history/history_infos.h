@@ -12,14 +12,12 @@
     #include <getopt.h>
 
     #define HISTORY_FILE ".42sh_history"
-    #define HISTORY_FLAGS (O_CREAT | O_APPEND | O_RDWR)
-    #define FILE_MODE 0666
 
     #define INVALID_FILE 84
     #define FILE_INIT_CORRECT 0
 
 typedef struct history_s {
-    int fileno;
+    FILE *fp;
     char **history;
     bool without_number;
     bool sort;

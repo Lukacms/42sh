@@ -9,6 +9,7 @@
     #define INFOS_H_
 
     #include <sys/types.h>
+    #include <stdio.h>
     #include "mysh/parse/parsing_infos.h"
     #include "mysh/history/history_infos.h"
     #include "mysh/alias/alias_infos.h"
