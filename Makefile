@@ -74,8 +74,18 @@ SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 		src/analyse_command/launch_binaries/execute/search_in_paths.c	\
 		src/analyse_command/launch_binaries/execute/execute_binary.c	\
 
+SRC_KERNEL	=	src/kernel/terminal.c	\
+		src/analyse_command/mods/analyse_char.c	\
+		src/analyse_command/getnextline.c	\
+		src/analyse_command/mods/special_char_handler/ctrl_l_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_down_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_up_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_left_handler.c	\
+
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
 OBJ	+= $(SRC_INIT:.c=.o) $(SRC_BUILTINS:.c=.o) $(SRC_EXEC:.c=.o)
+OBJ	+= $(SRC_KERNEL:.c=.o)
 
 SRC_MAIN	=	src/main.c
 
@@ -112,7 +122,7 @@ CPPFLAGS	=	-I./include
 
 LDFLAGS	=	-L./lib
 
-LDLIBS	=	-lmy
+LDLIBS	=	-lmy -lncurses
 
 CC	=	gcc
 

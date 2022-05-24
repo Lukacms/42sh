@@ -19,6 +19,7 @@ static void init_shell(shell_t *shell)
     shell->is_output = 0;
     shell->path = (path_t){0};
     shell->redirect = false;
+    shell->termios = (termios_t){0};
 }
 
 int create_shell(shell_t *shell, char * const env[])
@@ -29,6 +30,8 @@ int create_shell(shell_t *shell, char * const env[])
     if (create_env_list(env, shell) != SUCCESS)
         return FAILURE;
     if (init_history(&shell->history) != SUCCESS)
+        return FAILURE;
+    if (init_terminal(shell) != SUCCESS)
         return FAILURE;
     return SUCCESS;
 }

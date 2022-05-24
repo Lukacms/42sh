@@ -17,4 +17,13 @@ typedef struct char_handler_s {
     special_char_handler_t handler;
 } char_handler_t;
 
+int analyse_char(int c, shell_t *shell);
+
+// fucntion pointers for special chars
+int key_up_handler(shell_t *shell);
+int key_down_handler(shell_t *shell);
+int key_left_handler(shell_t *shell);
+int key_right_handler(shell_t *shell);
+int ctrl_l_handler(shell_t *shell);
+
 #endif /* !EDITION_H_ */
