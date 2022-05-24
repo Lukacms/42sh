@@ -29,6 +29,15 @@ static int get_options(char flag, shell_t *shell)
     return SUCCESS;
 }
 
+static int error_len(int len)
+{
+    if (len > 3) {
+        my_printf("history: Too many arguments.\n");
+        return FAILURE;
+    }
+    return SUCCESS;
+}
+
 static int parse_history_cmd(char *cmd, shell_t *shell)
 {
     char *optstring = "chr";
@@ -43,10 +52,8 @@ static int parse_history_cmd(char *cmd, shell_t *shell)
     if (!(args = str_to_array_choice(cmd, " ")))
         return FAILURE;
     len = array_len(args);
-    if (len > 3) {
-        my_printf("history: Too many arguments.\n");
+    if (error_len(len) != SUCCESS)
         return FAILURE;
-    }
     optind = 1;
     while ((opt = getopt(len, args, optstring)) != -1) {
         if (get_options(opt, shell) != SUCCESS)
