@@ -118,10 +118,10 @@ int cmd_handler_unsetenv(char **array, shell_t *shell);
 
 /*
 * @brief cmd_handler: history
-* 
-* @param array 
-* @param shell 
-* @return int 
+*
+* @param array
+* @param shell
+* @return int
 */
 int cmd_handler_history(char **array, shell_t *shell);
 
@@ -169,7 +169,8 @@ int red_cmd_loop(split_node_t *head, shell_t *shell);
 int pipe_cmd_loop(red_node_t *red, shell_t *shell);
 int split_cmd_loop(shell_t *shell);
 
-int double_left_redirect(red_node_t *node, split_node_t *split, shell_t *shell);
+int double_left_redirect(red_node_t *node, split_node_t *split,
+    shell_t *shell);
 int double_right_redirect(red_node_t *node, split_node_t *split,
     shell_t *shell);
 int left_redirect(red_node_t *node, split_node_t *split, shell_t *shell);

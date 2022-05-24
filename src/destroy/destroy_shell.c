@@ -7,5 +7,3 @@
 
 #include <stdlib.h>
 #include "mysh.h"
-
-
