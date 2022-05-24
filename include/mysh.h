@@ -24,7 +24,7 @@
 * @param env
 * @return int - SUCCESS | FAILURE
 */
-int launch(char *const env[]);
+int launch(char *const env[], char * const argv[]);
 
 /*
 * @brief Create a shell object
@@ -32,7 +32,7 @@ int launch(char *const env[]);
 * @param shell
 * @return int
 */
-int create_shell(shell_t *shell, char * const env[]);
+int create_shell(shell_t *shell, char * const env[], char * const argv[]);
 
 /*
 * @brief display of prompt

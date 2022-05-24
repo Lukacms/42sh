@@ -9,9 +9,9 @@
 #include <unistd.h>
 #include "mysh.h"
 
-int main(int ac, char __attribute__((unused))*const av[], char *const env[])
+int main(int ac, char *const av[], char *const env[])
 {
     if (ac != 1)
         return FAILURE;
-    return launch(env);
+    return launch(env, av);
 }
