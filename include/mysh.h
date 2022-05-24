@@ -16,6 +16,7 @@
     #include "mysh/parse/parsing.h"
     #include "mysh/parse/edition.h"
     #include "mysh/kernel/kernel_params.h"
+    #include "mysh/alias/special_variables.h"
 
 /*
 * @brief base for algortithm - main loop which get the arguments

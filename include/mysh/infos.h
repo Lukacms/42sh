@@ -36,11 +36,12 @@ typedef struct shell_s {
     parsing_infos_t cmd;
     alias_t aliases;
     history_t history;
+    termios_t termios;
     int is_output;
     int is_input;
     bool redirect;
     bool finished;
-    termios_t termios;
+    int return_cmd;
 } shell_t;
 
 typedef int (*command_handler_t)(char **array, shell_t *shell);
