@@ -32,11 +32,18 @@ static split_type_t get_split(char *split)
 
 static char *get_red(char *cmd)
 {
+    int len = 1;
+    int cmp = 0;
+    int size = 0;
+
     if (!cmd || !(*cmd))
         return NULL;
-    for (int i = 0; redirect[i]; i += 1)
-        if (my_strncmp(cmd, redirect[i], my_strlen(redirect[i])) == SUCCESS)
+    for (int i = 0; redirect[i]; i += 1) {
+        size = my_strlen(redirect[i]);
+        if ((cmp = my_strncmp(cmd, redirect[i], size)) == SUCCESS ||
+            (size < my_strlen(cmd) && cmd[len] == cmp))
             return redirect[i];
+    }
     return NULL;
 }
 

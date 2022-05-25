@@ -15,11 +15,17 @@ static char * const splits[] = {";", "&&", "||", "&", NULL};
 
 static char *get_split(char *cmd)
 {
+    int size = 0;
+    int cmp = 0;
+
     if (!cmd)
         return NULL;
-    for (int i = 0; splits[i]; i += 1)
-        if (my_strncmp(cmd, splits[i], my_strlen(splits[i])) == SUCCESS)
+    for (int i = 0; splits[i]; i += 1) {
+        size = my_strlen(splits[i]);
+        if ((cmp = my_strncmp(cmd, splits[i], size)) == SUCCESS ||
+            (size < my_strlen(cmd) && cmp == cmd[size]))
             return splits[i];
+    }
     return NULL;
 }
 
