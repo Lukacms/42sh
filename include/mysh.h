@@ -43,10 +43,10 @@ int create_shell(shell_t *shell, char * const env[], char * const argv[]);
 void display_prompt(int status, shell_t *shell);
 
 /**
- * @brief destroy any info left
- *
- * @param shell
- */
+* @brief destroy any info left
+*
+* @param shell
+*/
 void destroy_shell(shell_t *shell);
 
 #endif /* !MYSH_H_ */
