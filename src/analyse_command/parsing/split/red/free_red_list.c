@@ -20,7 +20,7 @@ void free_red_list(split_node_t *split)
         return;
     anchor = split->head;
     tmp = split->head;
-    for (u_int i = 0; i < split->size; i++) {
+    for (unsigned int i = 0; i < split->size; i++) {
         anchor = anchor->next;
         free_pipe_list(tmp);
         free(tmp);

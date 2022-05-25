@@ -24,7 +24,7 @@ static split_type_t get_split(char *split)
 {
     if (!split || !(*split))
         return NOTHING;
-    for (u_int i = 0; handler[i].red; i++)
+    for (unsigned int i = 0; handler[i].red; i++)
         if (my_strcmp(handler[i].red, split) == SUCCESS)
             return handler[i].split;
     return NOTHING;
@@ -47,7 +47,7 @@ int info_split_node(split_node_t *node, char *cmd, char *delim)
     char *substring = NULL;
     int size = 0;
 
-    if (!node || !cmd)
+    if (!node)
         return FAILURE;
     size = my_strlen(cmd);
     for (int i = 0; (substring = separate_cmd(cmd + index, redirect, &i))

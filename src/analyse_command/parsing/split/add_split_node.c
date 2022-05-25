@@ -37,7 +37,7 @@ int add_split_node(shell_t *shell, char *cmd, char *delim)
 {
     split_node_t *node = NULL;
 
-    if (!shell || !cmd || !(node = malloc(sizeof(split_node_t))))
+    if (!shell || !(node = malloc(sizeof(split_node_t))))
         return FAILURE;
     init_node(node);
     if (info_split_node(node, cmd, delim) != SUCCESS)

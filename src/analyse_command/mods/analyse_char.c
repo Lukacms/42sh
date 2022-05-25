@@ -22,7 +22,7 @@ int analyse_char(int c, shell_t *shell)
 {
     if (!c || !shell)
         return FAILURE;
-    for (u_int i = 0; handler[i].handler; i += 1) {
+    for (unsigned int i = 0; handler[i].handler; i += 1) {
         if (handler[i].c == c)
             return handler[i].handler(shell);
     }

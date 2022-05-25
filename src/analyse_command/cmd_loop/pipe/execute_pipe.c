@@ -12,9 +12,9 @@
 #include "mysh.h"
 #include "my.h"
 
-static void deal_with_fds(int **fd, u_int size, bool prev, bool next)
+static void deal_with_fds(int **fd, unsigned int size, bool prev, bool next)
 {
-    for (u_int i = 0; fd[i]; i++) {
+    for (unsigned int i = 0; fd[i]; i++) {
         if (prev == true && i == size - 1) {
             dup2(fd[i][0], STDIN_FILENO);
             close(fd[i][1]);
@@ -30,14 +30,16 @@ static void deal_with_fds(int **fd, u_int size, bool prev, bool next)
     }
 }
 
-int execute_pipe(pipe_node_t *node, int **fd, u_int i, shell_t *shell)
+int execute_pipe(pipe_node_t *node, int **fd, unsigned int i, shell_t *shell)
 {
     int status = 0;
 
     if (!node || !fd)
-        return status;
-    if (!node->cmd || !node->cmd[0])
-        return my_printf("Invalid null command.\n");
+        return ERROR_REDIRECT;
+    if (!node->cmd || !node->cmd[0]) {
+        my_printf("Invalid null command.\n");
+        return ERROR_REDIRECT;
+    }
     deal_with_fds(fd, i, node->prev_pipe, node->next_pipe);
     status = analyse_cmd(node->cmd, shell);
     return status;

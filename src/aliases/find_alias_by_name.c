@@ -16,7 +16,7 @@ alias_node_t *find_alias_by_name(char const *name, shell_t *shell)
 
     if (!name || !shell || !(tmp = shell->aliases.head))
         return NULL;
-    for (u_int i = 0; i < shell->aliases.size; i += 1) {
+    for (unsigned int i = 0; i < shell->aliases.size; i += 1) {
         if (my_strcmp(tmp->name, name) == SUCCESS)
             return tmp;
         tmp = tmp->next;

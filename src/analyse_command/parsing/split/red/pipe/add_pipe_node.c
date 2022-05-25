@@ -37,7 +37,7 @@ int add_pipe_node(red_node_t *redirect, char *cmd, char *delim)
 {
     pipe_node_t *node = NULL;
 
-    if (!redirect || !cmd || !(node = malloc(sizeof(pipe_node_t))))
+    if (!redirect || !(node = malloc(sizeof(pipe_node_t))))
         return FAILURE;
     init_node(node);
     if (info_in_pipe_node(node, cmd, delim) != SUCCESS)

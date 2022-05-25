@@ -21,10 +21,13 @@ static int is_pipe(char *delim)
 
 int info_in_pipe_node(pipe_node_t *node, char *cmd, char *delim)
 {
-    if (!node || !cmd)
+    if (!node)
         return FAILURE;
     if (is_pipe(delim) == SUCCESS)
         node->next_pipe = true;
-    node->cmd = str_to_array_choice(cmd, SEPARATOR);
+    if (!cmd || !(*cmd))
+        node->cmd = NULL;
+    else
+        node->cmd = str_to_array_choice(cmd, SEPARATOR);
     return SUCCESS;
 }

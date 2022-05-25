@@ -29,7 +29,7 @@ int split_cmd_loop(shell_t *shell)
     if (!shell || !shell->cmd.head)
         return status;
     node = shell->cmd.head;
-    for (u_int i = 0; i < shell->cmd.size; i++) {
+    for (unsigned int i = 0; i < shell->cmd.size; i++) {
         status = exec_split(shell, node, status);
         node = node->next;
     }
