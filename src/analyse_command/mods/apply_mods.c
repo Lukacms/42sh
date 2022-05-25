@@ -20,6 +20,36 @@ static int cmp_arrays(char **src, char **cmp)
     return SUCCESS;
 }
 
+static int glob_inside(char *str, char c)
+{
+    if (!str)
+        return FAILURE;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == c)
+            return 1;
+    }
+    return 0;
+}
+
+static char **clean_tab(char **tab)
+{
+    char **temp = NULL;
+    int len = 0;
+    int i = 0;
+
+    while (tab[len]) {
+        if (glob_inside(tab[i], '?') != 1)
+            len++;
+    }
+    temp = malloc(sizeof(char *) * (len + 1));
+    for (; tab[i]; i++) {
+        if (glob_inside(tab[i], '?') != 1) {
+            temp[i] = my_strdup(tab[i]);
+        }
+    }
+    return temp;
+}
+
 char **globbing(char *str, char **dest)
 {
     glob_t globb;
@@ -28,15 +58,20 @@ char **globbing(char *str, char **dest)
 
     if (!str || !dest || !(*dest))
         return NULL;
-    status = glob(str, GLOB_ERR, NULL, &globb);
+    status = glob(str, GLOB_NOSORT | GLOB_ERR, NULL, &globb);
     if (status != 0) {
         if (status == GLOB_NOMATCH)
-            printf("no match\n");
+            printf("No match.\n");
         return NULL;
     }
     //printf("Found %zu filename matches\n",globb.gl_pathc);
     tab = globb.gl_pathv;
-    tab = concate_arrays(tab, dest);
+    tab = concate_arrays(dest, tab);
+    //tab = clean_tab(tab);
+    my_printf("---------\n");
+    for (int i = 0; tab[i]; i++)
+        my_printf("%s\n", tab[i]);
+    my_printf("---------\n");
     globfree(&globb);
     return tab;
 }
