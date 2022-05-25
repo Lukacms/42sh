@@ -18,6 +18,8 @@
     #define DOUBLE (O_CREAT | O_APPEND | O_RDWR)
     #define MODE 0666
 
+    #define PIPE_NULL "Invalid null command.\n"
+
 typedef enum redirect {
     LEFT_REDIRECT,
     RIGHT_REDIRECT,
@@ -43,7 +45,7 @@ typedef struct pipe_node_s {
 
 typedef struct red_node_s {
     pipe_node_t *head;
-    u_int size;
+    unsigned int size;
     redirect_type_t prev_red;
     redirect_type_t next_red;
     struct red_node_s *prev;
@@ -52,7 +54,7 @@ typedef struct red_node_s {
 
 typedef struct split_node_s {
     red_node_t *head;
-    u_int size;
+    unsigned int size;
     split_type_t prev_split;
     split_type_t next_split;
     struct split_node_s *prev;

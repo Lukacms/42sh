@@ -26,7 +26,7 @@ shell_t *shell)
 {
     int status = 0;
 
-    for (u_int i = 0; redirect[i].handler; i++)
+    for (unsigned int i = 0; redirect[i].handler; i++)
         if (redirect[i].type == node->prev_red) {
             status = redirect[i].handler(node, split, shell);
             break;
@@ -51,7 +51,7 @@ int red_cmd_loop(split_node_t *split, shell_t *shell)
     node = split->head->prev;
     if (split->size == 1 && check_unique_errors(node))
         return ERROR_REDIRECT;
-    for (u_int i = 0; i < split->size; i++) {
+    for (unsigned int i = 0; i < split->size; i++) {
         status |= set_redirections(split, node, shell);
         node = node->prev;
     }

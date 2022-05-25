@@ -25,7 +25,7 @@ static redirect_type_t get_red(char *red)
 {
     if (!red || !(*red))
         return R_NOTHING;
-    for (u_int i = 0; handler[i].red; i++)
+    for (unsigned int i = 0; handler[i].red; i++)
         if (my_strcmp(handler[i].red, red) == SUCCESS)
             return handler[i].type;
     return R_NOTHING;
@@ -35,10 +35,12 @@ static char *get_pipe(char *cmd)
 {
     char *pipe = "|";
     int len = 1;
+    int cmp = 0;
 
     if (!cmd || !(*cmd))
         return NULL;
-    if (my_strncmp(cmd, pipe, len) == SUCCESS)
+    if ((cmp = my_strncmp(cmd, pipe, len)) == SUCCESS || (len < my_strlen(cmd)
+        && cmd[len] == cmp))
         return pipe;
     return NULL;
 }
@@ -50,7 +52,7 @@ int info_red_node(red_node_t *node, char *cmd, char *delim)
     char *substring = NULL;
     int size = 0;
 
-    if (!node || !cmd)
+    if (!node)
         return FAILURE;
     size = my_strlen(cmd);
     for (int i = 0; (substring = separate_cmd(cmd + index, separate, &i))

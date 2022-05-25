@@ -177,7 +177,7 @@ int left_redirect(red_node_t *node, split_node_t *split, shell_t *shell);
 int right_redirect(red_node_t *node, split_node_t *split, shell_t *shell);
 int beheads_node(red_node_t *red);
 int concate_nodes(red_node_t *concate, red_node_t *from);
-int execute_pipe(pipe_node_t *node, int **fd, u_int i, shell_t *shell);
+int execute_pipe(pipe_node_t *node, int **fd, unsigned int i, shell_t *shell);
 int check_errors_left(red_node_t *node, red_node_t *concate, shell_t *shell);
 int check_errors_right(red_node_t *node, shell_t *shell);
 int check_unique_errors(red_node_t *node);

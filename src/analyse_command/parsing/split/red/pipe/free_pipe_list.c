@@ -25,7 +25,7 @@ void free_pipe_list(red_node_t *red)
         return;
     anchor = red->head;
     tmp = red->head;
-    for (u_int i = 0; i < red->size; i++) {
+    for (unsigned int i = 0; i < red->size; i++) {
         anchor = anchor->next;
         free_node(tmp);
         free(tmp);

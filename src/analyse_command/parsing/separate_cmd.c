@@ -11,10 +11,13 @@
 static int is_delim(char *cmd, char * const delim[])
 {
     int size = 0;
+    int cmp = 0;
+    int cmd_size = my_strlen(cmd);
 
     for (int i = 0; delim[i]; i++) {
         size = my_strlen(delim[i]);
-        if (my_strncmp(cmd, delim[i], size) == 0)
+        if ((cmp = my_strncmp(cmd, delim[i], size)) == 0 || (
+            size < cmd_size && cmp == cmd[size]))
             return size;
     }
     return -1;
@@ -24,7 +27,7 @@ static int count_len(char *cmd, char * const delim[])
 {
     int size = 0;
 
-    for (; is_delim(cmd + size, delim) <= 0; size += 1);
+    for (; cmd[size] && is_delim(cmd + size, delim) <= 0; size += 1);
     return size;
 }
 

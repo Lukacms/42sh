@@ -20,7 +20,7 @@ void free_split_node(shell_t *shell)
         return;
     anchor = shell->cmd.head;
     tmp = shell->cmd.head;
-    for (u_int i = 0; i < shell->cmd.size; i++) {
+    for (unsigned int i = 0; i < shell->cmd.size; i++) {
         anchor = anchor->next;
         free_red_list(tmp);
         free(tmp);

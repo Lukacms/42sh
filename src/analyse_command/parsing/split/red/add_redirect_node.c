@@ -37,7 +37,7 @@ int add_redirect_node(split_node_t *split, char *cmd, char *delim)
 {
     red_node_t *node = NULL;
 
-    if (!split || !cmd || !(node = malloc(sizeof(red_node_t))))
+    if (!split || !(node = malloc(sizeof(red_node_t))))
         return FAILURE;
     init_node(node);
     if (info_red_node(node, cmd, delim) != SUCCESS)

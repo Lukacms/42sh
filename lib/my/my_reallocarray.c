@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include "my.h"
 
-char **my_reallocarray(char **ptr, u_int y, u_int x)
+char **my_reallocarray(char **ptr, unsigned int y, unsigned int x)
 {
     char **new_ptr = NULL;
-    u_int i = 0;
+    unsigned int i = 0;
 
     new_ptr = malloc(sizeof(char *) * (y + 1));
     if (!new_ptr)

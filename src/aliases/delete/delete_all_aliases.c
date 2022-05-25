@@ -17,7 +17,7 @@ int delete_all_aliases(shell_t *shell)
 
     if (!shell || !(anchor = shell->aliases.head))
         return NOT_FOUND;
-    for (u_int i = 0; i < shell->aliases.size; i++) {
+    for (unsigned int i = 0; i < shell->aliases.size; i++) {
         tmp = anchor;
         anchor = anchor->next;
         if (tmp->name)

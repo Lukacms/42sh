@@ -15,7 +15,7 @@ static int print_all_aliases(shell_t *shell)
 
     if (!tmp)
         return ERROR_BUILTIN;
-    for (u_int i = 0; i < shell->aliases.size; i += 1) {
+    for (unsigned int i = 0; i < shell->aliases.size; i += 1) {
         my_printf("%s\t", tmp->name);
         print_alias_value(tmp->value, true);
         my_printf("\n");
