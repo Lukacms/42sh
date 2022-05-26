@@ -26,11 +26,8 @@ Test(add_nodes, null_params)
     split_node_t split = {0};
 
     cr_assert_eq(add_pipe_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(add_pipe_node(&node, NULL, 0), FAILURE);
     cr_assert_eq(add_split_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(add_split_node(&shell, NULL, 0), FAILURE);
     cr_assert_eq(add_redirect_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(add_redirect_node(&split, NULL, 0), FAILURE);
 }
 
 Test(launch, without_env)
@@ -48,11 +45,8 @@ Test(info_in_node, null_param)
     split_node_t split = {0};
 
     cr_assert_eq(info_in_pipe_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(info_in_pipe_node(&pipe, NULL, 0), FAILURE);
     cr_assert_eq(info_red_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(info_red_node(&red, NULL, 0), FAILURE);
     cr_assert_eq(info_split_node(NULL, NULL, 0), FAILURE);
-    cr_assert_eq(info_split_node(&split, NULL, 0), FAILURE);
 }
 
 Test(free, null_params_for_free)
