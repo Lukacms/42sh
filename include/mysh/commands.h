@@ -162,6 +162,7 @@ int search_command_in_path(shell_t *shell, char **cmd, char *const env[]);
 * @return char** | NULL
 */
 char **env_to_array(shell_t *shell);
+char **my_clean_array(char **array);
 
 int loop_pipe(red_node_t *red, shell_t *shell);
 int simple_cmd(pipe_node_t *pipe, shell_t *shell);
