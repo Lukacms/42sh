@@ -41,5 +41,7 @@ char **apply_mods(char **og, shell_t *shell)
         return og;
     dest = ((dest = aliases_infos(og, shell)) ? dest : og);
     dest = ((dest = special_variables(dest, shell)) ? dest : og);
+    if (!(dest = my_globbing(dest)))
+        return NULL;
     return dest;
 }

@@ -14,6 +14,8 @@ SRC	=	src/launch.c	\
 		src/env/destroy_list/free_specific_node.c	\
 		src/analyse_command/cmd_loop/analyse_cmd.c	\
 		src/analyse_command/mods/apply_mods.c	\
+		src/analyse_command/mods/globbing.c	\
+		src/analyse_command/mods/clean_globbing.c	\
 		src/analyse_command/get_cmd.c	\
 		src/destroy/destroy_shell.c	\
 
