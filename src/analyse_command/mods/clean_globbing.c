@@ -9,8 +9,10 @@
 #include "mysh.h"
 #include "my.h"
 
-static int check_double(char *str, char **tab, int index)
+static int check_double(char *str, char **tab, int index, int mods)
 {
+    if (!mods)
+        return 0;
     for (int i = 0; tab[i] && i < index; ++i) {
         if (my_strcmp(str, tab[i]) == 0)
             return 1;
@@ -18,23 +20,23 @@ static int check_double(char *str, char **tab, int index)
     return 0;
 }
 
-char **my_clean_array(char **tab)
+char **my_clean_array(char **tab, int mods)
 {
     int len_tab = 0;
-    int index = 0;
+    int ind = 0;
     char **result = NULL;
 
     if (!tab)
         return NULL;
     for (int i = 0; tab[i]; i++) {
-        if (!glob_inside(tab[i]) && !check_double(tab[i], tab, i))
+        if (!glob_inside(tab[i]) && !check_double(tab[i], tab, i, mods))
             len_tab++;
     }
     result = malloc(sizeof(char *) * (len_tab + 1));
-    for (int i = 0; tab[i] != NULL && index < len_tab; ++i) {
-        if (!glob_inside(tab[i]) && !check_double(tab[i], result, index)) {
-            result[index] = my_strdup(tab[i]);
-            index++;
+    for (int i = 0; tab[i] != NULL && ind < len_tab; ++i) {
+        if (!glob_inside(tab[i]) && !check_double(tab[i], result, ind, mods)) {
+            result[ind] = my_strdup(tab[i]);
+            ind++;
         }
     }
     result[len_tab] = NULL;

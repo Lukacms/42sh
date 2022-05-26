@@ -34,7 +34,7 @@ int glob_inside(char *str)
     return 0;
 }
 
-static char **do_gloobing(char *cmd, int *stat, char *binary)
+static char **do_gloobing(char *cmd, int *stat, char *binary, int *mods)
 {
     int status = 0;
     char **tab = NULL;
@@ -49,6 +49,7 @@ static char **do_gloobing(char *cmd, int *stat, char *binary)
         *stat = FAILURE;
         return NULL;
     }
+    *mods += 1;
     tab = dup_array(globb.gl_pathv);
     globfree(&globb);
     return tab;
@@ -79,17 +80,18 @@ char **my_globbing(char **dest)
     char **new = NULL;
     char **tab = NULL;
     int status = 0;
+    int modified = 0;
 
     if (!dest)
         return NULL;
     for (int i = 0; dest[i] != NULL; i++) {
-        tab = do_gloobing(dest[i], &status, dest[0]);
+        tab = do_gloobing(dest[i], &status, dest[0], &modified);
         new = my_concat_tab(new, tab);
         free_array((void **)tab);
     }
     if (status != 0)
         return NULL;
-    tab = my_clean_array(dest);
+    tab = my_clean_array(dest, modified);
     new = concate_arrays(tab, new);
     free_array((void **)tab);
     return new;
