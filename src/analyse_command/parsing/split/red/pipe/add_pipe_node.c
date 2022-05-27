@@ -17,6 +17,8 @@ static void init_node(pipe_node_t *node)
     node->cmd = NULL;
     node->next_pipe = false;
     node->prev_pipe = false;
+    node->head = NULL;
+    node->size = 0;
     node->prev = node;
     node->next = node;
 }
