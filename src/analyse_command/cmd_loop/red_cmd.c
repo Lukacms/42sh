@@ -41,6 +41,17 @@ static void reset_in_out(shell_t *shell)
     shell->redirect = false;
 }
 
+static int redirects(shell_t *shell, split_node_t *split, red_node_t *node)
+{
+    int status = 0;
+
+    for (unsigned int i = 0; i < split->size; i++) {
+        status |= set_redirections(split, node, shell);
+        node = node->prev;
+    }
+    return status;
+}
+
 int red_cmd_loop(split_node_t *split, shell_t *shell)
 {
     red_node_t *node = NULL;
@@ -51,11 +62,7 @@ int red_cmd_loop(split_node_t *split, shell_t *shell)
     node = split->head->prev;
     if (split->size == 1 && check_unique_errors(node))
         return ERROR_REDIRECT;
-    for (unsigned int i = 0; i < split->size; i++) {
-        status |= set_redirections(split, node, shell);
-        node = node->prev;
-    }
-    if (status != SUCCESS)
+    else if (split->size > 1 && (status = redirects(shell, split, node)))
         return ERROR_REDIRECT;
     node = split->head;
     status = pipe_cmd_loop(node, shell);
