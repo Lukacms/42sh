@@ -28,11 +28,30 @@ static char *get_special_handling(char *line, shell_t *shell)
     return line;
 }
 
+static char *get_env_handling(char *line, shell_t *shell)
+{
+    env_node_t *node = shell->env.head;
+
+    if (!node || line[0] != '$')
+        return line;
+    for (unsigned int i = 0; i < shell->env.size; i += 1) {
+        if (my_strcmp(line + 1, node->var_name) == SUCCESS) {
+            free(line);
+            line = my_strdup(node->var_value);
+            return line;
+        }
+        node = node->next;
+    }
+    return line;
+}
+
 char **special_variables(char **og, shell_t *shell)
 {
     if (!og || !(*og) || !shell)
         return NULL;
-    for (unsigned int i = 0; og[i]; i += 1)
+    for (unsigned int i = 0; og[i]; i += 1) {
         og[i] = get_special_handling(og[i], shell);
+        og[i] = get_env_handling(og[i], shell);
+    }
     return og;
 }
