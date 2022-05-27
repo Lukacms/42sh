@@ -19,7 +19,7 @@ SRC	=	my_printf/my_printf.c					\
 		my_printf/flags/flag_handler_percent.c	\
 		my_printf/flags/flag_handler_u.c		\
 		my_printf/flags/flag_handler_upper_s.c	\
-		my_printf/flags/flag_handler_upper_x.c
+		my_printf/flags/flag_handler_upper_x.c	\
 
 SRC_LIB	=	my_compute_power_rec.c				\
 			my_compute_square_root.c 			\
@@ -65,7 +65,8 @@ SRC_LIB	=	my_compute_power_rec.c				\
 			dup_array.c							\
 			str_to_word_array.c					\
 			concat_arrays.c						\
-			array_len.c						\
+			array_len.c							\
+			char_in_str.c						\
 
 OBJ	=	$(SRC:.c=.o)
 
