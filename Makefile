@@ -5,6 +5,8 @@
 ## Makefile
 ##
 
+SPECIAL_VARIABLE =	src/analyse_command/mods/special_variables/handler/
+
 SRC	=	src/launch.c	\
 		src/prompt/display_prompt.c	\
 		src/env/destroy_list/free_list.c	\
@@ -13,13 +15,8 @@ SRC	=	src/launch.c	\
 		src/env/manipulate_linked_list/add_node_for_setenv.c	\
 		src/env/destroy_list/free_specific_node.c	\
 		src/analyse_command/cmd_loop/analyse_cmd.c	\
-		src/analyse_command/mods/apply_mods.c	\
-		src/analyse_command/mods/globbing.c	\
-		src/analyse_command/mods/clean_globbing.c	\
 		src/analyse_command/get_cmd.c	\
 		src/destroy/destroy_shell.c	\
-
-SPECIAL_VARIABLE =	src/analyse_command/mods/special_variables/handler/
 
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/separate_cmd.c	\
@@ -32,13 +29,6 @@ SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/split/red/pipe/add_pipe_node.c	\
 		src/analyse_command/parsing/split/red/pipe/free_pipe_list.c	\
 		src/analyse_command/parsing/split/red/pipe/info_in_pipe_node.c	\
-		src/analyse_command/mods/special_variables/special_variables.c	\
-		$(addprefix $(SPECIAL_VARIABLE), dollard_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), underscore_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), exclamation_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), hashtag_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), zero_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), interogation_handler.c)	\
 
 SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red_cmd.c	\
@@ -94,9 +84,21 @@ SRC_KERNEL	=	src/kernel/terminal.c	\
 		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
 		src/analyse_command/mods/special_char_handler/key_left_handler.c	\
 
+SRC_MODS	=	src/analyse_command/mods/inhibitor.c	\
+		src/analyse_command/mods/apply_mods.c	\
+		src/analyse_command/mods/globbing.c	\
+		src/analyse_command/mods/clean_globbing.c	\
+		src/analyse_command/mods/special_variables/special_variables.c	\
+		$(addprefix $(SPECIAL_VARIABLE), dollard_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), underscore_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), exclamation_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), hashtag_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), zero_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), interogation_handler.c)	\
+
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
 OBJ	+= $(SRC_INIT:.c=.o) $(SRC_BUILTINS:.c=.o) $(SRC_EXEC:.c=.o)
-OBJ	+= $(SRC_KERNEL:.c=.o)
+OBJ	+= $(SRC_KERNEL:.c=.o) $(SRC_MODS:.c=.o)
 
 SRC_MAIN	=	src/main.c
 

@@ -26,4 +26,7 @@ int key_left_handler(shell_t *shell);
 int key_right_handler(shell_t *shell);
 int ctrl_l_handler(shell_t *shell);
 
+// inhibitor
+char **inhibitor(char **og);
+
 #endif /* !EDITION_H_ */

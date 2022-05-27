@@ -19,11 +19,6 @@ char **my_reallocarray(char **ptr, unsigned int y, unsigned int x)
         return NULL;
     for (; ptr && ptr[i]; i++)
         new_ptr[i] = my_strdup(ptr[i]);
-    for (; i < y; i++) {
-        if (!(new_ptr[i] = malloc(sizeof(char) * (x + 1))))
-            return NULL;
-        my_memset(new_ptr[i], x, '\0');
-    }
     new_ptr[y] = NULL;
     free_array((void **)ptr);
     return new_ptr;
