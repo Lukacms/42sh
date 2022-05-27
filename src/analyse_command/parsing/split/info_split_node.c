@@ -39,8 +39,7 @@ static char *get_red(char *cmd)
         return NULL;
     for (int i = 0; redirect[i]; i += 1) {
         size = my_strlen(redirect[i]);
-        if ((cmp = my_strncmp(cmd, redirect[i], size)) == SUCCESS ||
-            (size < my_strlen(cmd) && cmd[size] == cmp))
+        if ((cmp = my_strncmp(cmd, redirect[i], size)) == SUCCESS)
             return redirect[i];
     }
     return NULL;

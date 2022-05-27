@@ -39,8 +39,7 @@ static char *get_pipe(char *cmd)
 
     if (!cmd || !(*cmd))
         return NULL;
-    if ((cmp = my_strncmp(cmd, pipe, len)) == SUCCESS || (len < my_strlen(cmd)
-        && cmd[len] == cmp))
+    if ((cmp = my_strncmp(cmd, pipe, len)) == SUCCESS)
         return pipe;
     return NULL;
 }

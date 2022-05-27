@@ -14,6 +14,8 @@ static int err_pipe(red_node_t *red)
 {
     pipe_node_t *pipe = red->head;
 
+    if (red->size == 1)
+        return SUCCESS;
     if (!red->head) {
         my_printf(PIPE_NULL);
         return ERROR_REDIRECT;

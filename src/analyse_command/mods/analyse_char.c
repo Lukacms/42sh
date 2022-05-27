@@ -10,11 +10,11 @@
 #include "mysh.h"
 
 static const char_handler_t handler[] = {
-    {.c = KEY_UP, .handler = key_up_handler},
-    {.c = KEY_DOWN, .handler = key_down_handler},
-    {.c = KEY_LEFT, .handler = key_left_handler},
-    {.c = KEY_RIGHT, .handler = key_right_handler},
-    {.c = '\f', .handler = ctrl_l_handler},
+    {.c = KEY_UP, .handler = &key_up_handler},
+    {.c = KEY_DOWN, .handler = &key_down_handler},
+    {.c = KEY_LEFT, .handler = &key_left_handler},
+    {.c = KEY_RIGHT, .handler = &key_right_handler},
+    {.c = '\f', .handler = &ctrl_l_handler},
     {0}
 };
 
