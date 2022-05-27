@@ -22,7 +22,7 @@ static char **inhibitor_loop(char **og, int i)
         len = getline(&cmd, &size, stdin);
         cmd[len - 1] = '\0';
         i += 1;
-        og = my_reallocarray(og, i, len - 1);
+        og = my_reallocarray(og, i);
         og[i - 1] = my_strdup(cmd);
         og[i] = NULL;
         if (len > 1 && cmd[len - 2] != '\\')

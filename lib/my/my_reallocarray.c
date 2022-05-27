@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-char **my_reallocarray(char **ptr, unsigned int y, unsigned int x)
+char **my_reallocarray(char **ptr, unsigned int y)
 {
     char **new_ptr = NULL;
     unsigned int i = 0;

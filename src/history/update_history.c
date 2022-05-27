@@ -76,14 +76,12 @@ static int write_history_in_file(char *cmd, shell_t *shell)
 
 int update_history(char *cmd, shell_t *shell)
 {
-    int size = 0;
     int array_size = 0;
 
     if (!cmd || !shell)
         return FAILURE;
     if (parse_history_cmd(cmd, shell) != SUCCESS)
         return FAILURE;
-    size = my_strlen(cmd);
     if (shell->history.clear) {
         free_array((void**)shell->history.history);
         shell->history.history = NULL;
@@ -92,7 +90,7 @@ int update_history(char *cmd, shell_t *shell)
     }
     array_size = array_len(shell->history.history) + 1;
     shell->history.history =
-        my_reallocarray(shell->history.history, array_size, size);
+        my_reallocarray(shell->history.history, array_size);
     shell->history.history[array_size - 1] = my_strdup(cmd);
     write_history_in_file(cmd, shell);
     return SUCCESS;
