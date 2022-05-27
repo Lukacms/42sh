@@ -43,5 +43,6 @@ char **apply_mods(char **og, shell_t *shell)
     dest = ((dest = special_variables(dest, shell)) ? dest : og);
     if (!(dest = my_globbing(dest)))
         return NULL;
+    dest = ((dest = inhibitor(dest)) ? dest : og);
     return dest;
 }
