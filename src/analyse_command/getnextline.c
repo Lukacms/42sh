@@ -43,7 +43,7 @@ ssize_t getshellline(shell_t *shell, char **ptr, size_t *n, FILE *stream)
     (*ptr) = malloc(sizeof(char));
     *ptr[0] = '\0';
     while ((i = my_getc(shell->termios, *n)) != END && i != EOF) {
-        if (analyse_char(i, shell) == SUCCESS)
+        if (analyse_char(i, shell, ptr, *n) == SUCCESS)
             continue;
         *n += 1;
         if (!((*ptr) = realloc((*ptr), (*n))))

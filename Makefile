@@ -83,11 +83,12 @@ SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 SRC_KERNEL	=	src/kernel/terminal.c	\
 		src/analyse_command/mods/analyse_char.c	\
 		src/analyse_command/getnextline.c	\
+		src/analyse_command/mods/special_char_handler/delete_handler.c	\
 		src/analyse_command/mods/special_char_handler/ctrl_l_handler.c	\
-		src/analyse_command/mods/special_char_handler/key_down_handler.c	\
 		src/analyse_command/mods/special_char_handler/key_up_handler.c	\
-		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
 		src/analyse_command/mods/special_char_handler/key_left_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_down_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
 
 SRC_MODS	=	src/analyse_command/mods/inhibitor.c	\
 		src/analyse_command/mods/apply_mods.c	\
