@@ -22,7 +22,7 @@ int init_terminal(shell_t *shell)
         return FAILURE;
     if ((tcgetattr(STDIN_FILENO, &shell->termios)) < 0)
         return FAILURE;
-    shell->termios.c_lflag = (ICANON | ECHO | ECHOE | IEXTEN | ISIG);
+    shell->termios.c_lflag = (ECHO | IEXTEN | ISIG);
     shell->termios.c_cc[VMIN] = 1;
     shell->termios.c_cc[VTIME] = 0;
     shell->termios.c_cc[VEOF] = 4;

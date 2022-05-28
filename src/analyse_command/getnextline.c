@@ -5,6 +5,7 @@
 ** getnextline
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -12,11 +13,14 @@
 #include "mysh.h"
 #include "my.h"
 
-static int my_getc(void)
+static int my_getc(termios_t term, size_t size)
 {
-    char buf[1];
+    char buf[1] = {0};
+    int isok = 0;
 
-    read(0, buf, 1);
+    if ((isok = read(STDIN_FILENO, buf, 1)) < 0 || buf[0] <= 0 ||
+        (buf[0] == term.c_cc[VEOF] && !size))
+        return EOF;
     return buf[0];
 }
 
@@ -36,16 +40,19 @@ ssize_t getshellline(shell_t *shell, char **ptr, size_t *n, FILE *stream)
 
     if (!ptr || !stream)
         return EOF;
-    *n = 0;
     (*ptr) = malloc(sizeof(char));
     *ptr[0] = '\0';
-    while ((i = my_getc()) != END && i != EOF) {
+    while ((i = my_getc(shell->termios, *n)) != END && i != EOF) {
         if (analyse_char(i, shell) == SUCCESS)
             continue;
         *n += 1;
         if (!((*ptr) = realloc((*ptr), (*n))))
             return FAILURE;
         ptr[0][*n - 1] = i;
+    }
+    if (i == EOF) {
+        (*ptr) = NULL;
+        return EOF;
     }
     check_end(i, ptr, n);
     return (*n);

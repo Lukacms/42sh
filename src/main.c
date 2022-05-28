@@ -5,8 +5,6 @@
 ** main
 */
 
-#include <fcntl.h>
-#include <unistd.h>
 #include "mysh.h"
 
 int main(int ac, char *const av[], char *const env[])

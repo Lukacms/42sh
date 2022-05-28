@@ -27,9 +27,11 @@ static void shell_loop(shell_t *shell)
         }
         count = 0;
         free(command);
+        command = NULL;
     }
     my_printf("exit\n");
-    free(command);
+    if (command)
+        free(command);
 }
 
 int launch(char *const env[], char * const argv[])
