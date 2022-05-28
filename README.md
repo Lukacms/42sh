@@ -2,7 +2,7 @@
 
 ## What is the 42sh ?
 To sum it up, do you know what [tcsh](https://en.wikipedia.org/wiki/Tcsh) is ?<br>
-Well, the 42sh is a similar shell, and the last of the 3 year-end project given in our first year ([here is the pdf](https://github.com/Lukacms/42sh/assets/B-PSU-210_42sh.pdf)).<br>
+Well, the 42sh is a similar shell, and the last of the 3 year-end project given in our first year ([here is the pdf](https://github.com/Lukacms/42sh/blob/main/assets/B-PSU-210_42sh.pdf)).<br>
 Out of all what was required, we did:
 * Handling the execution line, notably the simple and double quotes
 * Pipes and multi-pipes
