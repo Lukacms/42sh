@@ -29,6 +29,7 @@ int parse_cmd(char *cmd, shell_t *shell);
 * @return char* - new substring
 */
 char *separate_cmd(char *cmd, char * const delim[], int *len);
+char **array_quoted(char *src, char *delim);
 
 /******************************************/
 /*                   split                */
@@ -62,5 +63,13 @@ void free_red_list(split_node_t *split);
 int add_pipe_node(red_node_t *redirect, char *cmd, char *delim);
 int info_in_pipe_node(pipe_node_t *node, char *cmd, char *delim);
 void free_pipe_list(red_node_t *red);
+char **array_without_magic(char **og, pipe_node_t *pipe);
+
+/******************************************/
+/*                   magic                */
+/******************************************/
+
+int add_magic(char *cmd, pipe_node_t *pipe);
+void free_magic_list(pipe_node_t *pipe);
 
 #endif /* !PARSING_H_ */
