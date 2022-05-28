@@ -20,6 +20,7 @@ SRC	=	src/launch.c	\
 
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/separate_cmd.c	\
+		src/analyse_command/parsing/array_quoted.c	\
 		src/analyse_command/parsing/split/add_split_node.c	\
 		src/analyse_command/parsing/split/info_split_node.c	\
 		src/analyse_command/parsing/split/free_split_node.c	\
@@ -28,7 +29,10 @@ SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/split/red/add_redirect_node.c	\
 		src/analyse_command/parsing/split/red/pipe/add_pipe_node.c	\
 		src/analyse_command/parsing/split/red/pipe/free_pipe_list.c	\
+		src/analyse_command/parsing/split/red/pipe/magic/add_magic.c	\
 		src/analyse_command/parsing/split/red/pipe/info_in_pipe_node.c	\
+		src/analyse_command/parsing/split/red/pipe/array_without_magic.c	\
+		src/analyse_command/parsing/split/red/pipe/magic/free_magic_list.c	\
 
 SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red_cmd.c	\
@@ -44,6 +48,7 @@ SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/pipe/execute_pipe.c	\
 		src/analyse_command/cmd_loop/red/check_errors.c	\
 		src/history/update_history.c	\
+		src/analyse_command/cmd_loop/pipe/magic/magic_loop.c	\
 
 SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/find_alias_by_name.c	\

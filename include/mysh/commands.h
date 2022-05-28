@@ -183,4 +183,6 @@ int check_errors_left(red_node_t *node, red_node_t *concate, shell_t *shell);
 int check_errors_right(red_node_t *node, shell_t *shell);
 int check_unique_errors(red_node_t *node);
 
+char **magic_loop(pipe_node_t *pipe, shell_t *shell);
+
 #endif /* !COMMANDS_H_ */

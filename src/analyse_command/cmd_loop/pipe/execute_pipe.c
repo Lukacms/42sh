@@ -33,6 +33,8 @@ static void deal_with_fds(int **fd, unsigned int size, bool prev, bool next)
 int execute_pipe(pipe_node_t *node, int **fd, unsigned int i, shell_t *shell)
 {
     int status = 0;
+    char **cmd = NULL;
+    char **tmp = NULL;
 
     if (!node || !fd)
         return ERROR_REDIRECT;
@@ -41,6 +43,10 @@ int execute_pipe(pipe_node_t *node, int **fd, unsigned int i, shell_t *shell)
         return ERROR_REDIRECT;
     }
     deal_with_fds(fd, i, node->prev_pipe, node->next_pipe);
-    status = analyse_cmd(node->cmd, shell);
+    if ((tmp = magic_loop(node, shell)))
+        cmd = concate_arrays(node->cmd, tmp);
+    status = analyse_cmd((cmd ? cmd : node->cmd), shell);
+    free_array((void **)tmp);
+    free_array((void **)cmd);
     return status;
 }

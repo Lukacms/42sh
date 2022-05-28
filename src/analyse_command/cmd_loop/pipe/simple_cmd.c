@@ -13,6 +13,8 @@
 int simple_cmd(pipe_node_t *pipe, shell_t *shell)
 {
     int status = 0;
+    char **cmd = NULL;
+    char **tmp = NULL;
 
     if (!pipe || !shell)
         return NOT_FOUND;
@@ -21,6 +23,10 @@ int simple_cmd(pipe_node_t *pipe, shell_t *shell)
         return ERROR_REDIRECT;
     }
     shell->redirect = true;
-    status = analyse_cmd(pipe->cmd, shell);
+    if ((tmp = magic_loop(pipe, shell)))
+        cmd = concate_arrays(pipe->cmd, tmp);
+    status = analyse_cmd((cmd ? cmd : pipe->cmd), shell);
+    free_array((void **)cmd);
+    free_array((void **)tmp);
     return status;
 }

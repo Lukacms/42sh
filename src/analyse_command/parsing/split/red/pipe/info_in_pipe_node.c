@@ -21,13 +21,18 @@ static int is_pipe(char *delim)
 
 int info_in_pipe_node(pipe_node_t *node, char *cmd, char *delim)
 {
+    char **tmp = NULL;
+
     if (!node)
         return FAILURE;
     if (is_pipe(delim) == SUCCESS)
         node->next_pipe = true;
     if (!cmd || !(*cmd))
         node->cmd = NULL;
-    else
-        node->cmd = str_to_array_choice(cmd, SEPARATOR);
+    else {
+        tmp = array_quoted(cmd, SEPARATOR);
+        node->cmd = array_without_magic(tmp, node);
+        free_array((void **)tmp);
+    }
     return SUCCESS;
 }

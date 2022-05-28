@@ -13,6 +13,8 @@
     #include <stdbool.h>
 
     #define SEPARATOR "\t "
+    #define MAGIC_QUOTE '`'
+    #define QUOTATION "\"'`"
 
     #define SIMPLE (O_CREAT | O_TRUNC | O_RDWR)
     #define DOUBLE (O_CREAT | O_APPEND | O_RDWR)

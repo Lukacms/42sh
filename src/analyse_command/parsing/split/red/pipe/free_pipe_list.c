@@ -14,6 +14,7 @@ static void free_node(pipe_node_t *node)
 {
     if (node->cmd)
         free_array((void **)node->cmd);
+    free_magic_list(node);
 }
 
 void free_pipe_list(red_node_t *red)
