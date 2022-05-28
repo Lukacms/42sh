@@ -15,11 +15,11 @@ static const char_handler_t handler[] = {
     {.c = KEY_LEFT, .handler = &key_left_handler},
     {.c = KEY_RIGHT, .handler = &key_right_handler},
     {.c = '\f', .handler = &ctrl_l_handler},
-    {.c = '\b', .handler = &delete_handler},
+    {.c = 127, .handler = &delete_handler},
     {0}
 };
 
-int analyse_char(int c, shell_t *shell, char **line, int n)
+int analyse_char(int c, shell_t *shell, char **line, int *n)
 {
 
     if (!c || !shell)

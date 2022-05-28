@@ -8,7 +8,7 @@
 #include "mysh.h"
 
 int key_right_handler(shell_t *shell, char __attribute__((unused))**line,
-int __attribute__((unused))n)
+int __attribute__((unused))*n)
 {
     if (!shell)
         return NOT_FOUND;

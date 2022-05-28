@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "mysh.h"
 
-int ctrl_l_handler(shell_t *shell, char **line, int n)
+int ctrl_l_handler(shell_t *shell, char **line, int *n)
 {
     char *cmd[] = {"clear", "-x", NULL};
 
@@ -16,6 +16,6 @@ int ctrl_l_handler(shell_t *shell, char **line, int n)
         return NOT_FOUND;
     analyse_cmd(cmd, shell);
     display_prompt(shell->special.status, shell);
-    write(STDOUT_FILENO, *line, n);
+    write(STDOUT_FILENO, *line, *n);
     return SUCCESS;
 }
