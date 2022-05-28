@@ -12,24 +12,41 @@
 #include "mysh.h"
 #include "my.h"
 
+static int my_getc(void)
+{
+    char buf[1];
+
+    read(0, buf, 1);
+    return buf[0];
+}
+
+static void check_end(int i, char **ptr, size_t *n)
+{
+    if (i == END) {
+        if (!((*ptr) = realloc((*ptr), (*n + 1))))
+            return;
+        ptr[0][*n] = '\n';
+        (*n) += 1;
+    }
+}
+
 ssize_t getshellline(shell_t *shell, char **ptr, size_t *n, FILE *stream)
 {
-    ssize_t len = 0;
     int i = 0;
 
     if (!ptr || !stream)
         return EOF;
     *n = 0;
-    while ((i = getc(stream)) != END && i != EOF) {
+    (*ptr) = malloc(sizeof(char));
+    *ptr[0] = '\0';
+    while ((i = my_getc()) != END && i != EOF) {
         if (analyse_char(i, shell) == SUCCESS)
             continue;
         *n += 1;
         if (!((*ptr) = realloc((*ptr), (*n))))
             return FAILURE;
-        ptr[0][*n] = i;
+        ptr[0][*n - 1] = i;
     }
-    if (i == EOF)
-        return EOF;
-    len = my_strlen((*ptr));
-    return len;
+    check_end(i, ptr, n);
+    return (*n);
 }

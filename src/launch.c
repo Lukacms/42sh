@@ -20,11 +20,14 @@ static void shell_loop(shell_t *shell)
 
     while (shell->finished != true && size != -1) {
         display_prompt(status, shell);
-        size = getline(&command, &count, stdin);
+        //size = getline(&command, &count, stdin);
+        size = getshellline(shell, &command, &count, stdin);
         if (size != -1 && command[0] != '\n') {
             command[size - 1] = '\0';
             status = get_commands(shell, command);
         }
+        count = 0;
+        free(command);
     }
     my_printf("exit\n");
     free(command);
