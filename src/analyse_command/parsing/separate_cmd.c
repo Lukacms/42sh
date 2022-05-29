@@ -16,8 +16,7 @@ static int is_delim(char *cmd, char * const delim[])
 
     for (int i = 0; delim[i]; i++) {
         size = my_strlen(delim[i]);
-        if ((cmp = my_strncmp(cmd, delim[i], size)) == 0 || (
-            size < cmd_size && cmp == cmd[size]))
+        if ((cmp = my_strncmp(cmd, delim[i], size)) == 0)
             return size;
     }
     return -1;

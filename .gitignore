@@ -22,6 +22,7 @@ file
 *.txt
 test
 .42sh*
+*.sh
 
 # files created by project
 /.42sh_history
@@ -29,3 +30,6 @@ test
 # in case emacs
 *~
 *#
+
+#Test AT environement
+Dockerfile
