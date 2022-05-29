@@ -47,4 +47,7 @@ int add_job(job_control_t **job_control, char *const args[], int pid);
 */
 int remove_job(job_control_t **job_control, int pid, status_t status);
 
+void display_possible_err(shell_t *shell, int status, int pid);
+void display_errno(char const *cmd);
+
 #endif /* !JOB_CONTROL_H_ */

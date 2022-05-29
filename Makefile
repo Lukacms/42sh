@@ -84,6 +84,7 @@ SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 		src/analyse_command/launch_binaries/execute/execute_command.c	\
 		src/analyse_command/launch_binaries/execute/search_in_paths.c	\
 		src/analyse_command/launch_binaries/execute/execute_binary.c	\
+		src/analyse_command/launch_binaries/execute/error.c	\
 
 SRC_KERNEL	=	src/kernel/terminal.c	\
 		src/analyse_command/mods/analyse_char.c	\
