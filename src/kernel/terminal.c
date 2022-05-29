@@ -27,6 +27,7 @@ int init_terminal(shell_t *shell)
     shell->termios.c_cc[VTIME] = 0;
     shell->termios.c_cc[VEOF] = 4;
     shell->termios.c_cc[VERASE] = '\b';
+    shell->termios.c_cc[VSUSP] = 26;
     shell->termios.c_cc[VINTR] = 3;
     shell->termios.c_iflag = BRKINT | ICRNL | IXON;
     shell->termios.c_oflag = ONLCR | ONOCR | OPOST | OFDEL;
