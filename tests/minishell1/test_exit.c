@@ -13,5 +13,8 @@ void redirect(void);
 
 Test(cmd_handler_exit, test_for_exit, .init=redirect)
 {
-    cr_assert_eq(cmd_handler_exit(NULL, NULL), 1);
+    shell_t shell = {0};
+
+    cr_assert_eq(cmd_handler_exit(NULL, NULL), ERROR_BUILTIN);
+    cr_assert_eq(cmd_handler_exit(NULL, &shell), SUCCESS);
 }

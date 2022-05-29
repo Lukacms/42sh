@@ -116,23 +116,24 @@ SRC_MAIN	=	src/main.c
 OBJ_MAIN	=	$(SRC_MAIN:.c=.o)
 
 SRC_TESTS1	=	tests/minishell1/tests_env.c	\
-				tests/minishell1/test_setenv.c	\
-				tests/minishell1/tests_errors_for_builtsin.c	\
-				tests/minishell1/test_exit.c	\
-				tests/minishell1/test_prompt.c	\
-				tests/minishell1/tests_cd.c	\
-				tests/minishell1/tests_side_functions.c	\
-				tests/minishell1/tests_get_commands.c	\
-				tests/minishell1/tests_execute_binary.c	\
-				tests/minishell1/tests_env_functions.c
+		tests/minishell1/test_setenv.c	\
+		tests/minishell1/tests_errors_for_builtsin.c	\
+		tests/minishell1/test_exit.c	\
+		tests/minishell1/test_prompt.c	\
+		tests/minishell1/tests_cd.c	\
+		tests/minishell1/tests_side_functions.c	\
+		tests/minishell1/tests_get_commands.c	\
+		tests/minishell1/tests_execute_binary.c	\
+		tests/minishell1/tests_env_functions.c
 
 SRC_TESTS2	=	tests/minishell2/parsing_errors.c	\
-				tests/minishell2/tests_parsing.c	\
-				tests/minishell2/integration_test.c	\
+		tests/minishell2/tests_parsing.c	\
+		tests/minishell2/integration_test.c	\
 
-SRC_TESTS42	=
+SRC_TESTS42	=	tests/42sh/tests_aliases.c	\
+		tests/42sh/magic_tests.c	\
 
-OBJ_TESTS	=	$(SRC_TESTS1:.c=.o) $(SRC_TESTS2:.c=.o)
+OBJ_TESTS	=	$(SRC_TESTS1:.c=.o) $(SRC_TESTS2:.c=.o) $(SRC_TESTS42:.c=.o)
 
 NAME_TESTS	=	unit_test
 
