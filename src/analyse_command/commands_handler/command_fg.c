@@ -41,7 +41,7 @@ static int get_last_stopped_pid(job_control_t **jobs)
     while (tmp) {
         if (tmp->status == STOPPED) {
             temp_pid = tmp->pid;
-+           ++count;
+            ++count;
         }
         if (nb_stopped == count)
             save = dup_array(tmp->args);
