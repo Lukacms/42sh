@@ -52,6 +52,16 @@ static int count_words(char *src, char *delim)
     return nb;
 }
 
+static int skip_arrline(char *src, int i, int j, char *delim)
+{
+    j = i;
+    if (char_in_str(QUOTATION, src[i])) {
+        j += skip_quotes(src + i, src[i]) + 1;
+    } else
+        for (j = i; src[j] && !is_delim(src[j], delim); j = j + 1);
+    return j;
+}
+
 char **array_quoted(char *src, char *delim)
 {
     char **array = NULL;
@@ -65,10 +75,7 @@ char **array_quoted(char *src, char *delim)
         return NULL;
     for (int nb = 0; nb < nb_words; nb++) {
         for (i = j; src[i] && is_delim(src[i], delim); i = i + 1);
-        if (char_in_str(QUOTATION, src[i]))
-            j += skip_quotes(src + i, src[i]) + i;
-        else
-            for (j = i; src[j] && !is_delim(src[j], delim); j = j + 1);
+        j = skip_arrline(src, i, j, delim);
         if (!(array[nb] = my_strndup(src + i, j - i)))
             return NULL;
     }
