@@ -12,6 +12,7 @@
     #include <getopt.h>
 
     #define HISTORY_FILE ".42sh_history"
+    #define OPT_HISTORY_STRING "chr"
 
     #define INVALID_FILE 84
     #define FILE_INIT_CORRECT 0

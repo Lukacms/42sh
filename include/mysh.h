@@ -12,6 +12,7 @@
     #include "mysh/list/list.h"
     #include "mysh/history/history.h"
     #include "mysh/alias/alias.h"
+    #include "mysh/job_control/job_control.h"
     #include "mysh/commands.h"
     #include "mysh/parse/parsing.h"
     #include "mysh/parse/edition.h"

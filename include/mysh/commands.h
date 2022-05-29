@@ -126,6 +126,24 @@ int cmd_handler_unsetenv(char **array, shell_t *shell);
 int cmd_handler_history(char **array, shell_t *shell);
 
 /*
+* @brief cmd_handler: jobs
+*
+* @param array
+* @param shell
+* @return int
+*/
+int cmd_handler_jobs(char **array, shell_t *shell);
+
+/*
+* @brief cmd_handler: fg
+*
+* @param array
+* @param shell
+* @return int
+*/
+int cmd_handler_fg(char __attribute__((unused))**array, shell_t *shell);
+
+/*
 * @brief execute possible binaries
 *
 * @param shell

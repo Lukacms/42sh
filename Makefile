@@ -49,6 +49,8 @@ SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red/check_errors.c	\
 		src/history/update_history.c	\
 		src/analyse_command/cmd_loop/pipe/magic/magic_loop.c	\
+		src/job_control/check_jobs.c	\
+		src/job_control/manage_jobs.c	\
 
 SRC_ALIASES	=	src/aliases/add_node.c	\
 		src/aliases/find_alias_by_name.c	\
@@ -60,6 +62,7 @@ SRC_ALIASES	=	src/aliases/add_node.c	\
 
 SRC_INIT	=	src/prerequisite/create_shell.c	\
 		src/prerequisite/init_history.c	\
+		src/prerequisite/init_job.c	\
 		src/env/create_env_linked_list/add_node.c	\
 		src/env/create_env_linked_list/create_env_list.c	\
 
@@ -71,6 +74,8 @@ SRC_BUILTINS	=	src/analyse_command/commands_handler/command_cd.c	\
 		src/analyse_command/commands_handler/command_alias.c	\
 		src/analyse_command/commands_handler/command_unalias.c	\
 		src/analyse_command/commands_handler/command_history.c	\
+		src/analyse_command/commands_handler/command_jobs.c	\
+		src/analyse_command/commands_handler/command_fg.c	\
 
 SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 		src/analyse_command/launch_binaries/paths_list/destroy_paths.c	\

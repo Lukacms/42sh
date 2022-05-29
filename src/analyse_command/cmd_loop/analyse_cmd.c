@@ -18,6 +18,8 @@ static const command_handler_binder_t command_handler[] = {
     {.existing_command = "alias", .handler = &cmd_handler_alias},
     {.existing_command = "unalias", .handler = &cmd_handler_unalias},
     {.existing_command = "history", .handler = &cmd_handler_history},
+    {.existing_command = "jobs", .handler = &cmd_handler_jobs},
+    {.existing_command = "fg", .handler = &cmd_handler_fg},
     {0}
 };
 

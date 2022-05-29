@@ -14,6 +14,7 @@
 
     #include "mysh/parse/parsing_infos.h"
     #include "mysh/history/history_infos.h"
+    #include "mysh/job_control/job_control_infos.h"
     #include "mysh/alias/alias_infos.h"
     #include "mysh/list/list_infos.h"
     #include "mysh/alias/special_variables_infos.h"
@@ -37,6 +38,7 @@ typedef struct shell_s {
     parsing_infos_t cmd;
     alias_t aliases;
     history_t history;
+    job_t job;
     termios_t termios;
     int is_output;
     int is_input;

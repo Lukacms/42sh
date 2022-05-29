@@ -11,15 +11,24 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <errno.h>
 #include "mysh.h"
 #include "my.h"
 
-static void display_possible_err(int status)
+pid_t fgpid;
+
+static void display_possible_err(shell_t *shell, int status, int pid)
 {
-    if (WIFEXITED(status))
+    if (WIFSTOPPED(status)) {
+        my_printf("\nSuspended\n");
+        remove_job(&shell->job.control, pid, STOPPED);
+    }
+    if (WIFEXITED(status)) {
+        remove_job(&shell->job.control, pid, EXITED);
         return;
+    }
     if (WIFSIGNALED(status)) {
         if (WTERMSIG(status) == SIGFPE)
             my_printf("Floating exception");
@@ -47,6 +56,16 @@ static void set_filenos(shell_t *shell)
         dup2(shell->is_output, STDOUT_FILENO);
 }
 
+static void reset_signals_to_default(void)
+{
+    signal(SIGINT, SIG_DFL);
+    signal(SIGQUIT, SIG_DFL);
+    signal(SIGTSTP, SIG_DFL);
+    signal(SIGTTIN, SIG_DFL);
+    signal(SIGTTOU, SIG_DFL);
+    signal(SIGCHLD, SIG_DFL);
+}
+
 int execute_binary(char const *cmd, char *const args[], char *const env[],
 shell_t *shell)
 {
@@ -58,13 +77,20 @@ shell_t *shell)
     if ((cpid = fork()) < 0)
         return SUCCESS;
     if (cpid == 0) {
+        setpgid(cpid, cpid);
+        tcsetpgrp(shell_fd, getpid());
+        reset_signals_to_default();
         if (shell->redirect == true)
             set_filenos(shell);
         execve(cmd, args, env);
         display_errno(cmd);
         exit(0);
     }
+    tcsetpgrp(shell_fd, cpid);
+    add_job(&shell->job.control, args, cpid);
+    fgpid = cpid;
     waitpid(cpid, &status, WUNTRACED);
-    display_possible_err(status);
+    display_possible_err(shell, status, cpid);
+    tcsetpgrp(shell_fd, my_pgid);
     return status;
 }
