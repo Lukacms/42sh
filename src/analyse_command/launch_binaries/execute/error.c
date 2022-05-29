@@ -20,7 +20,7 @@
 void display_possible_err(shell_t *shell, int status, int pid)
 {
     if (WIFSTOPPED(status)) {
-        my_printf("\nSuspended\n");
+        my_printf("^Z\nSuspended\n");
         remove_job(&shell->job.control, pid, STOPPED);
     }
     if (WIFEXITED(status)) {
