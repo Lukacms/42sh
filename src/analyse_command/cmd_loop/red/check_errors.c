@@ -23,7 +23,7 @@ int check_errors_left(red_node_t *node, red_node_t *concate, shell_t *shell)
         my_printf("Ambiguous input redirect.\n");
         return FAILURE;
     }
-    if (!node->head->cmd || !node->head->cmd[0]) {
+    if (!node->head || !node->head->cmd || !node->head->cmd[0]) {
         my_printf("Missing name for redirect.\n");
         return FAILURE;
     }
@@ -43,7 +43,7 @@ int check_errors_right(red_node_t *node, shell_t *shell)
         my_printf("Ambiguous output redirect.\n");
         return FAILURE;
     }
-    if (!node->head->cmd || !node->head->cmd[0]) {
+    if (!node->head || !node->head->cmd || !node->head->cmd[0]) {
         my_printf("Missing name for redirect.\n");
         return FAILURE;
     }

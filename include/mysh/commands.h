@@ -180,6 +180,7 @@ int search_command_in_path(shell_t *shell, char **cmd, char *const env[]);
 * @return char** | NULL
 */
 char **env_to_array(shell_t *shell);
+char **my_clean_array(char **array, int mods);
 
 int loop_pipe(red_node_t *red, shell_t *shell);
 int simple_cmd(pipe_node_t *pipe, shell_t *shell);
@@ -199,5 +200,7 @@ int execute_pipe(pipe_node_t *node, int **fd, unsigned int i, shell_t *shell);
 int check_errors_left(red_node_t *node, red_node_t *concate, shell_t *shell);
 int check_errors_right(red_node_t *node, shell_t *shell);
 int check_unique_errors(red_node_t *node);
+
+char **magic_loop(pipe_node_t *pipe, shell_t *shell);
 
 #endif /* !COMMANDS_H_ */

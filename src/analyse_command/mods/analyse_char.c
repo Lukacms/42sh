@@ -10,21 +10,23 @@
 #include "mysh.h"
 
 static const char_handler_t handler[] = {
-    {.c = KEY_UP, .handler = key_up_handler},
-    {.c = KEY_DOWN, .handler = key_down_handler},
-    {.c = KEY_LEFT, .handler = key_left_handler},
-    {.c = KEY_RIGHT, .handler = key_right_handler},
-    {.c = '\f', .handler = ctrl_l_handler},
+    {.c = KEY_UP, .handler = &key_up_handler},
+    {.c = KEY_DOWN, .handler = &key_down_handler},
+    {.c = KEY_LEFT, .handler = &key_left_handler},
+    {.c = KEY_RIGHT, .handler = &key_right_handler},
+    {.c = '\f', .handler = &ctrl_l_handler},
+    {.c = 127, .handler = &delete_handler},
     {0}
 };
 
-int analyse_char(int c, shell_t *shell)
+int analyse_char(int c, shell_t *shell, char **line, int *n)
 {
+
     if (!c || !shell)
         return FAILURE;
     for (unsigned int i = 0; handler[i].handler; i += 1) {
         if (handler[i].c == c)
-            return handler[i].handler(shell);
+            return handler[i].handler(shell, line, n);
     }
     return FAILURE;
 }

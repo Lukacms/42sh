@@ -5,6 +5,8 @@
 ## Makefile
 ##
 
+SPECIAL_VARIABLE =	src/analyse_command/mods/special_variables/handler/
+
 SRC	=	src/launch.c	\
 		src/prompt/display_prompt.c	\
 		src/env/destroy_list/free_list.c	\
@@ -13,14 +15,12 @@ SRC	=	src/launch.c	\
 		src/env/manipulate_linked_list/add_node_for_setenv.c	\
 		src/env/destroy_list/free_specific_node.c	\
 		src/analyse_command/cmd_loop/analyse_cmd.c	\
-		src/analyse_command/mods/apply_mods.c	\
 		src/analyse_command/get_cmd.c	\
 		src/destroy/destroy_shell.c	\
 
-SPECIAL_VARIABLE =	src/analyse_command/mods/special_variables/handler/
-
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/separate_cmd.c	\
+		src/analyse_command/parsing/array_quoted.c	\
 		src/analyse_command/parsing/split/add_split_node.c	\
 		src/analyse_command/parsing/split/info_split_node.c	\
 		src/analyse_command/parsing/split/free_split_node.c	\
@@ -29,14 +29,10 @@ SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/split/red/add_redirect_node.c	\
 		src/analyse_command/parsing/split/red/pipe/add_pipe_node.c	\
 		src/analyse_command/parsing/split/red/pipe/free_pipe_list.c	\
+		src/analyse_command/parsing/split/red/pipe/magic/add_magic.c	\
 		src/analyse_command/parsing/split/red/pipe/info_in_pipe_node.c	\
-		src/analyse_command/mods/special_variables/special_variables.c	\
-		$(addprefix $(SPECIAL_VARIABLE), dollard_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), underscore_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), exclamation_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), hashtag_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), zero_handler.c)	\
-		$(addprefix $(SPECIAL_VARIABLE), interogation_handler.c)	\
+		src/analyse_command/parsing/split/red/pipe/array_without_magic.c	\
+		src/analyse_command/parsing/split/red/pipe/magic/free_magic_list.c	\
 
 SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/red_cmd.c	\
@@ -52,6 +48,7 @@ SRC_CMD	=	src/analyse_command/cmd_loop/split_cmd.c	\
 		src/analyse_command/cmd_loop/pipe/execute_pipe.c	\
 		src/analyse_command/cmd_loop/red/check_errors.c	\
 		src/history/update_history.c	\
+		src/analyse_command/cmd_loop/pipe/magic/magic_loop.c	\
 		src/job_control/check_jobs.c	\
 		src/job_control/manage_jobs.c	\
 
@@ -91,15 +88,28 @@ SRC_EXEC	=	src/analyse_command/launch_binaries/execute/env_to_array.c	\
 SRC_KERNEL	=	src/kernel/terminal.c	\
 		src/analyse_command/mods/analyse_char.c	\
 		src/analyse_command/getnextline.c	\
+		src/analyse_command/mods/special_char_handler/delete_handler.c	\
 		src/analyse_command/mods/special_char_handler/ctrl_l_handler.c	\
-		src/analyse_command/mods/special_char_handler/key_down_handler.c	\
 		src/analyse_command/mods/special_char_handler/key_up_handler.c	\
-		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
 		src/analyse_command/mods/special_char_handler/key_left_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_down_handler.c	\
+		src/analyse_command/mods/special_char_handler/key_right_handler.c	\
+
+SRC_MODS	=	src/analyse_command/mods/inhibitor.c	\
+		src/analyse_command/mods/apply_mods.c	\
+		src/analyse_command/mods/globbing.c	\
+		src/analyse_command/mods/clean_globbing.c	\
+		src/analyse_command/mods/special_variables/special_variables.c	\
+		$(addprefix $(SPECIAL_VARIABLE), dollard_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), underscore_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), exclamation_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), hashtag_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), zero_handler.c)	\
+		$(addprefix $(SPECIAL_VARIABLE), interogation_handler.c)	\
 
 OBJ	=	$(SRC:.c=.o) $(SRC_PARSE:.c=.o) $(SRC_CMD:.c=.o) $(SRC_ALIASES:.c=.o)
 OBJ	+= $(SRC_INIT:.c=.o) $(SRC_BUILTINS:.c=.o) $(SRC_EXEC:.c=.o)
-OBJ	+= $(SRC_KERNEL:.c=.o)
+OBJ	+= $(SRC_KERNEL:.c=.o) $(SRC_MODS:.c=.o)
 
 SRC_MAIN	=	src/main.c
 

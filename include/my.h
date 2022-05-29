@@ -71,11 +71,12 @@ char *my_strndup(char *const src, int n);
 char *my_int_to_str(int nb);
 char *load_file_in_mem(char const *filepath);
 void free_array(void **array);
-char **my_reallocarray(char **ptr, unsigned int y, unsigned int x);
+char **my_reallocarray(char **ptr, unsigned int y);
 void my_memset(char *ptr, unsigned int x, char c);
 char **dup_array(char * const origin[]);
 char **str_to_array_choice(char *src, char *delim);
 char **concate_arrays(char **src, char **add);
 int array_len(char **array);
+int char_in_str(char *str, char c);
 
 #endif /*MY_H*/

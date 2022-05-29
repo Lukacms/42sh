@@ -13,12 +13,15 @@
     #include <stdbool.h>
 
     #define SEPARATOR "\t "
+    #define MAGIC_QUOTE '`'
+    #define QUOTATION "\"'`"
 
     #define SIMPLE (O_CREAT | O_TRUNC | O_RDWR)
     #define DOUBLE (O_CREAT | O_APPEND | O_RDWR)
     #define MODE 0666
 
     #define PIPE_NULL "Invalid null command.\n"
+    #define MISMATCHED_PARSING "Unmatched '%c'.\n"
 
 typedef enum redirect {
     LEFT_REDIRECT,
@@ -35,10 +38,18 @@ typedef enum split {
     NOTHING
 } split_type_t;
 
+typedef struct magic_node_s {
+    char *cmd;
+    struct magic_node_s *prev;
+    struct magic_node_s *next;
+} magic_node_t;
+
 typedef struct pipe_node_s {
     char **cmd;
     bool prev_pipe;
     bool next_pipe;
+    magic_node_t *head;
+    unsigned int size;
     struct pipe_node_s *prev;
     struct pipe_node_s *next;
 } pipe_node_t;

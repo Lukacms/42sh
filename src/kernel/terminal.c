@@ -22,11 +22,11 @@ int init_terminal(shell_t *shell)
         return FAILURE;
     if ((tcgetattr(STDIN_FILENO, &shell->termios)) < 0)
         return FAILURE;
-    shell->termios.c_lflag = (ICANON | ECHO | ECHOE | IEXTEN | ISIG);
+    shell->termios.c_lflag = (ECHO | IEXTEN | ISIG);
     shell->termios.c_cc[VMIN] = 1;
     shell->termios.c_cc[VTIME] = 0;
     shell->termios.c_cc[VEOF] = 4;
-    shell->termios.c_cc[VERASE] = 0x7f;
+    shell->termios.c_cc[VERASE] = '\b';
     shell->termios.c_cc[VINTR] = 3;
     shell->termios.c_iflag = BRKINT | ICRNL | IXON;
     shell->termios.c_oflag = ONLCR | ONOCR | OPOST | OFDEL;
