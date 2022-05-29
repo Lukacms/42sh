@@ -12,7 +12,8 @@
 #include "mysh.h"
 #include "my.h"
 
-int double_right_redirect(red_node_t *node, split_node_t *split, shell_t *shell)
+int double_right_redirect(red_node_t *node, split_node_t *split,
+    shell_t *shell)
 {
     int status = 0;
 
