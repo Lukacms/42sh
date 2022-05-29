@@ -17,6 +17,10 @@ SRC	=	src/launch.c	\
 		src/analyse_command/cmd_loop/analyse_cmd.c	\
 		src/analyse_command/get_cmd.c	\
 		src/destroy/destroy_shell.c	\
+		src/job_control/my_pgid.c	\
+		src/job_control/my_pid.c	\
+		src/job_control/shell_fd.c	\
+		src/job_control/fgpid.c	\
 
 SRC_PARSE	=	src/analyse_command/parsing/parse_cmd.c	\
 		src/analyse_command/parsing/separate_cmd.c	\

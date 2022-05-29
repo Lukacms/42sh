@@ -50,4 +50,14 @@ int remove_job(job_control_t **job_control, int pid, status_t status);
 void display_possible_err(shell_t *shell, int status, int pid);
 void display_errno(char const *cmd);
 
+void set_mypgid(pid_t value);
+void set_mypid(pid_t value);
+void set_shellfd(pid_t value);
+void set_fgpid(pid_t value);
+
+int *get_shell_fd(void);
+pid_t *get_mypgid(void);
+pid_t *get_mypid(void);
+pid_t *get_fgpid(void);
+
 #endif /* !JOB_CONTROL_H_ */

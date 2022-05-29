@@ -11,20 +11,16 @@
 #include "mysh.h"
 #include "my.h"
 
-int shell_fd;
-pid_t my_pid;
-pid_t my_pgid;
-
 static void init_signal(void)
 {
-    shell_fd = STDERR_FILENO;
+    set_shellfd(STDERR_FILENO);
     signal(SIGTSTP, SIG_IGN);
     signal(SIGTTIN, SIG_IGN);
     signal(SIGTTOU, SIG_IGN);
-    my_pid = getpid();
-    my_pgid = getpid();
-    setpgid(my_pid, my_pgid);
-    tcsetpgrp(shell_fd, my_pgid);
+    set_mypid(getpid());
+    set_mypgid(getpid());
+    setpgid(*(get_mypid()), *(get_mypgid()));
+    tcsetpgrp(*(get_shell_fd()), *(get_mypgid()));
 }
 
 static void init_shell(shell_t *shell)

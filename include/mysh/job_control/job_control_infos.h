@@ -39,9 +39,4 @@ typedef struct job_s {
     job_control_t *control;
 } job_t;
 
-extern int shell_fd;
-extern pid_t my_pid;
-extern pid_t my_pgid;
-extern pid_t fgpid;
-
 #endif /* !JOB_CONTROL_INFOS_H_ */

@@ -17,8 +17,6 @@
 #include "mysh.h"
 #include "my.h"
 
-pid_t fgpid;
-
 static void set_filenos(shell_t *shell)
 {
     if (shell->is_input > 0)
@@ -40,12 +38,12 @@ static void reset_signals_to_default(void)
 static int after_exec(shell_t *shell, char *const args[], pid_t *cpid,
 int *status)
 {
-    tcsetpgrp(shell_fd, (*cpid));
+    tcsetpgrp(*(get_shell_fd()), (*cpid));
     add_job(&shell->job.control, args, (*cpid));
-    fgpid = (*cpid);
+    set_fgpid((*cpid));
     waitpid((*cpid), status, WUNTRACED);
     display_possible_err(shell, (*status), (*cpid));
-    tcsetpgrp(shell_fd, my_pgid);
+    tcsetpgrp(*(get_shell_fd()), *(get_mypgid()));
     return (*status);
 }
 
@@ -61,7 +59,7 @@ shell_t *shell)
         return SUCCESS;
     if (cpid == 0) {
         setpgid(cpid, cpid);
-        tcsetpgrp(shell_fd, getpid());
+        tcsetpgrp(*(get_shell_fd()), getpid());
         reset_signals_to_default();
         if (shell->redirect == true)
             set_filenos(shell);

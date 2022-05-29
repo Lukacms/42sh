@@ -72,7 +72,7 @@ int cmd_handler_fg(char __attribute__((unused))**array, shell_t *shell)
     if (last_pid == -1)
         return FAILURE;
     setpgid(last_pid, last_pid);
-    tcsetpgrp(shell_fd, last_pid);
+    tcsetpgrp(*(get_shell_fd()), last_pid);
     kill(last_pid, SIGCONT);
     waitpid(last_pid, &wstatus, WUNTRACED);
     if (!WIFSTOPPED(wstatus))
@@ -81,6 +81,6 @@ int cmd_handler_fg(char __attribute__((unused))**array, shell_t *shell)
         my_printf("\nSuspended\n");
         remove_job(&shell->job.control, last_pid, STOPPED);
     }
-    tcsetpgrp(shell_fd, getpid());
+    tcsetpgrp(*(get_shell_fd()), getpid());
     return SUCCESS;
 }
