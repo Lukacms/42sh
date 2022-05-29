@@ -17,9 +17,7 @@
 #include "mysh.h"
 #include "my.h"
 
-int shell_fd;
 pid_t fgpid;
-pid_t my_pgid;
 
 static void display_possible_err(shell_t *shell, int status, int pid)
 {

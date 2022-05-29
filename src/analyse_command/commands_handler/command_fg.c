@@ -12,8 +12,6 @@
 #include "mysh.h"
 #include "my.h"
 
-int shell_fd;
-
 static int find_nb_stopped(job_control_t *tmp)
 {
     int count = 0;

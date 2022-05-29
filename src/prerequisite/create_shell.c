@@ -57,7 +57,5 @@ int create_shell(shell_t *shell, char * const env[], char * const argv[])
         return FAILURE;
     if (init_job(&shell->job) != SUCCESS)
         return FAILURE;
-    // if (init_terminal(shell) != SUCCESS)
-    //     return FAILURE;
     return SUCCESS;
 }
