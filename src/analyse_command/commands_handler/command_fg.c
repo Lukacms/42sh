@@ -24,18 +24,14 @@ static int find_nb_stopped(job_control_t *tmp)
     return count;
 }
 
-static int get_last_stopped_pid(job_control_t **jobs)
+static int loop_jobs(job_control_t *tmp, int nb_stopped)
 {
-    job_control_t *tmp = NULL;
     int temp_pid = 0;
-    char **save = NULL;
-    int nb_stopped = 0;
     int count = 0;
+    char **save = NULL;
 
-    if (!jobs)
-        return -1;
-    tmp = (*jobs);
-    nb_stopped = find_nb_stopped(tmp);
+    if (!tmp)
+        return 0;
     while (tmp) {
         if (tmp->status == STOPPED) {
             temp_pid = tmp->pid;
@@ -48,6 +44,20 @@ static int get_last_stopped_pid(job_control_t **jobs)
     for (int i = 0; save[i]; i++)
         my_printf("%s ", save[i]);
     my_printf("\n");
+    return temp_pid;
+}
+
+static int get_last_stopped_pid(job_control_t **jobs)
+{
+    job_control_t *tmp = NULL;
+    int nb_stopped = 0;
+    int temp_pid = 0;
+
+    if (!jobs)
+        return -1;
+    tmp = (*jobs);
+    nb_stopped = find_nb_stopped(tmp);
+    temp_pid = loop_jobs(tmp, nb_stopped);
     return temp_pid;
 }
 

@@ -36,6 +36,24 @@ status_t status)
     return sign;
 }
 
+static void set_bool_pid(shell_t *shell)
+{
+    shell->job.infos.more_informations = 0;
+    shell->job.infos.only_pid = 0;
+    shell->job.infos.only_running = 0;
+    shell->job.infos.only_stopped = 0;
+}
+
+static void print_job_info(shell_t *shell, job_control_t *jobs)
+{
+    if (shell->job.infos.more_informations) {
+        my_printf("\t\t\t\t");
+        for (int i = 0; jobs->args[i]; i++)
+            my_printf("%s ", jobs->args[i]);
+    }
+    my_printf("\n");
+}
+
 int cmd_handler_jobs(char __attribute__((unused))**array, shell_t *shell)
 {
     int i = 1;
@@ -46,21 +64,14 @@ int cmd_handler_jobs(char __attribute__((unused))**array, shell_t *shell)
     while (jobs != NULL) {
         if (jobs->status != EXITED) {
             my_printf("[%d]  ", i);
-            my_printf("%c ", detect_last_job(shell->job.control, jobs->pid, jobs->status));
+            my_printf("%c ", detect_last_job(shell->job.control,
+            jobs->pid, jobs->status));
             my_printf("%d %s", jobs->pid, status_jobs_array[jobs->status - 1]);
-            if (shell->job.infos.more_informations) {
-                my_printf("\t\t\t\t");
-                for (int i = 0; jobs->args[i]; i++)
-                    my_printf("%s ", jobs->args[i]);
-            }
-            my_printf("\n");
+            print_job_info(shell, jobs);
             ++i;
         }
         jobs = jobs->next;
     }
-    shell->job.infos.more_informations = 0;
-    shell->job.infos.only_pid = 0;
-    shell->job.infos.only_running = 0;
-    shell->job.infos.only_stopped = 0;
+    set_bool_pid(shell);
     return SUCCESS;
 }
