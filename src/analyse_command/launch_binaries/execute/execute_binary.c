@@ -19,35 +19,6 @@
 
 pid_t fgpid;
 
-static void display_possible_err(shell_t *shell, int status, int pid)
-{
-    if (WIFSTOPPED(status)) {
-        my_printf("\nSuspended\n");
-        remove_job(&shell->job.control, pid, STOPPED);
-    }
-    if (WIFEXITED(status)) {
-        remove_job(&shell->job.control, pid, EXITED);
-        return;
-    }
-    if (WIFSIGNALED(status)) {
-        if (WTERMSIG(status) == SIGFPE)
-            my_printf("Floating exception");
-        else
-            my_printf("%s", strsignal(WTERMSIG(status)));
-        if (WCOREDUMP(status))
-            my_printf(" (core dumped)");
-        my_printf("\n");
-    }
-}
-
-static void display_errno(char const *cmd)
-{
-    if (errno == ENOEXEC)
-        my_printf("%s: Exec format error. Wrong Architecture.\n", cmd);
-    else
-        my_printf("%s: %s.\n", cmd, strerror(errno));
-}
-
 static void set_filenos(shell_t *shell)
 {
     if (shell->is_input > 0)
@@ -64,6 +35,18 @@ static void reset_signals_to_default(void)
     signal(SIGTTIN, SIG_DFL);
     signal(SIGTTOU, SIG_DFL);
     signal(SIGCHLD, SIG_DFL);
+}
+
+static int after_exec(shell_t *shell, char *const args[], pid_t *cpid,
+int *status)
+{
+    tcsetpgrp(shell_fd, (*cpid));
+    add_job(&shell->job.control, args, (*cpid));
+    fgpid = (*cpid);
+    waitpid((*cpid), status, WUNTRACED);
+    display_possible_err(shell, (*status), (*cpid));
+    tcsetpgrp(shell_fd, my_pgid);
+    return (*status);
 }
 
 int execute_binary(char const *cmd, char *const args[], char *const env[],
@@ -86,11 +69,6 @@ shell_t *shell)
         display_errno(cmd);
         exit(0);
     }
-    tcsetpgrp(shell_fd, cpid);
-    add_job(&shell->job.control, args, cpid);
-    fgpid = cpid;
-    waitpid(cpid, &status, WUNTRACED);
-    display_possible_err(shell, status, cpid);
-    tcsetpgrp(shell_fd, my_pgid);
+    status = after_exec(shell, args, &cpid, &status);
     return status;
 }
