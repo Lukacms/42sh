@@ -132,6 +132,7 @@ SRC_TESTS2	=	tests/minishell2/parsing_errors.c	\
 
 SRC_TESTS42	=	tests/42sh/tests_aliases.c	\
 		tests/42sh/magic_tests.c	\
+		tests/42sh/test_42_integration.c	\
 
 OBJ_TESTS	=	$(SRC_TESTS1:.c=.o) $(SRC_TESTS2:.c=.o) $(SRC_TESTS42:.c=.o)
 

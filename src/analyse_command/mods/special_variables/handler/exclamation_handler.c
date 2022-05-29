@@ -10,8 +10,6 @@
 
 char *exclamation_handler(shell_t *shell, char *line)
 {
-    char *new = NULL;
-
     if (!shell || !line)
         return NULL;
     return line;
