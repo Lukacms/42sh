@@ -1,0 +1,16 @@
+ls `ls`
+alias ls ls --color=auto
+unalias *
+ll
+ls | cat -e | grep src | cat -e
+history
+history -c
+history -h
+history -r
+echo $0
+echo $?
+echo $#
+echo $$
+echo $!
+echo $_
+echo "hohoho "		       		"heheh hehehe hehe"

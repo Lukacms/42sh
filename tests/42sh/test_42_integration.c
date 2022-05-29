@@ -11,7 +11,7 @@
 #include <criterion/redirect.h>
 #include "mysh.h"
 
-char const filepath[] = "tests/assets/42_integration.txt";
+char const filepath[] = "./tests/assets/42_integration.txt";
 
 void redirect(void);
 
@@ -23,7 +23,7 @@ Test(launch, test_integration_42)
     char * const argv[] = {"oui"};
 
     if (fileno < 0)
-        cr_assert_eq(0, 1);
+        cr_assert_eq(0, 2);
     if (dup2(fileno, STDIN_FILENO) < 0)
         cr_assert_eq(0, 1);
     cr_assert_eq(launch(env, argv), SUCCESS);

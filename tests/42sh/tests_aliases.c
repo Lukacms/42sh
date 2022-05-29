@@ -12,9 +12,9 @@
 void redirect(void);
 
 /**
- * @brief Test basic functionnalities of alias builtin
- *
- */
+* @brief Test basic functionnalities of alias builtin
+*
+*/
 Test(cmd_handler_alias, add_aliases, .init=redirect)
 {
     char * const env[] = {"oui=non", "TERM=xterm-256color", NULL};
